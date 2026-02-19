@@ -1,0 +1,1958 @@
+\documentclass[a4paper,12pt]{article}
+
+% Lingua e codifica
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+
+% Impaginazione e matematica
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{hyperref}
+
+% Comandi utili
+\newcommand{\code}[1]{\texttt{#1}}
+
+
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+
+{\Large I.I.S. \textit{``Francesco Alberghetti''} Imola}\\[0.3cm]
+{\normalsize Liceo Scientifico Scienze Applicate}\\[2.2cm]
+
+\rule{0.85\textwidth}{0.8pt}\\[0.9cm]
+
+{\huge\bfseries Codifica dell'informazione}\\[0.4cm]
+{\Large Sistemi di numerazione binario ed esadecimale.\\[0.2cm]Codifica dei caratteri e delle immagini.}\\[0.6cm]
+
+\rule{0.85\textwidth}{0.8pt}\\[2.5cm]
+
+{\Large Materiale didattico di Informatica}\\[0.3cm]
+
+
+% ICONA OPZIONALE (consigliata)
+% \includegraphics[width=0.3\textwidth]{images/cover_icon.png}
+
+\vfill
+
+{\large Prof. Federico Mazzini}\\[0.3cm]
+{\large Anno scolastico 2025 -- 2026}
+
+\end{titlepage}
+\newpage
+\tableofcontents
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Informazione, dato e rappresentazione}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Per comprendere il significato di ''codifica dell'informazione'' è utile chiarire alcuni concetti fondamentali:
+\begin{itemize}
+  \item \textbf{dato}
+  \item \textbf{informazione}
+  \item \textbf{rappresentazione}
+\end{itemize}
+
+\subsection{Dato}
+
+Per \textbf{dato} si intende un elemento grezzo, non ancora interpretato. Un numero scritto su un foglio, una sequenza di simboli, una misura in forma numerica.
+Esempio:
+\begin{itemize}
+  \item La scritta \code{42} rappresenta un dato. Letta così, da sola, non è possibile capire se si parla di una temperatura, di un'età, di un punteggio o di un codice.
+\end{itemize}
+
+\subsection{Informazione}
+
+L'\textbf{informazione} nasce quando un dato viene interpretato in un contesto.
+
+Esempi:
+\begin{itemize}
+  \item \code{42} accompagnato dalla parola ``anni'' viene interpretato come un'età.
+  \item \code{42 °C} indica una temperatura.
+  \item \code{42 km} rappresenta una distanza.
+\end{itemize}
+
+Il significato dipende quindi dal \textbf{contesto} e dalle \textbf{regole di interpretazione} condivise.
+
+\subsection{Rappresentazione}
+
+La \textbf{rappresentazione} riguarda il modo in cui un'informazione viene codificata. La stessa informazione può avere rappresentazioni differenti. Ad esempio, il numero quarantadue può essere rappresentato come \code{42} in decimale, 42 sassolini su un piano, \code{101010} in binario.
+
+In un computer qualsiasi cosa (numeri, testo, audio, video) viene sempre e solo rappresentata tramite una sequenza di bit (0 e 1). Questo costituisce il punto di partenza per tutto il resto.
+
+\subsection{Perché serve una rappresentazione digitale (e binaria)}
+
+I dispositivi elettronici lavorano con segnali elettrici. Per rendere la lettura di questi segnali più semplice e ridurre gli errori, è utile distinguere soltanto se il segnale è "spento" oppure "acceso".
+
+Per questo, nella progettazione dei calcolatori, si scelgono solo due stati possibili:
+\begin{itemize}
+  \item stato spento \textrightarrow{} lo rappresentiamo con 0;
+  \item stato acceso \textrightarrow{} lo rappresentiamo con 1.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Bit, byte e quantità di informazione}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Il bit}
+
+Il \textbf{bit} (\emph{binary digit}) costituisce l'unità minima di informazione trattata da un calcolatore. Può assumere solo due valori possibili:
+\begin{center}
+0 oppure 1
+\end{center}
+
+\subsection{Il byte e i suoi multipli}
+
+Per ragioni pratiche i bit vengono raggruppati in blocchi di 8. Otto bit formano un \textbf{byte}. Il byte rappresenta l'unità di misura di base per la memoria e per la capacità di memorizzazione.
+
+
+
+Multipli più comuni:
+\begin{itemize}
+  \item 1 KB (kilobyte) = 1024 byte
+  \item 1 MB (megabyte) = 1024 KB
+  \item 1 GB (gigabyte) = 1024 MB
+  \item 1 TB (terabyte) = 1024 GB
+  \item 1 PB (petabyte) = 1024 TB
+\end{itemize}
+
+\subsubsection*{Perchè proprio 1024?}
+L'uso di 1024 anziché 1000 è dovuto alla natura binaria dei calcolatori: 1024= $2^{10}$.
+
+\subsubsection*{Alcuni numeri}
+
+\begin{center}
+\begin{tabular}{>{\raggedright\arraybackslash}p{10cm}r}
+\toprule
+Esempio & Dimensione indicativa \\
+\midrule
+Breve messaggio WhatsApp (solo testo) & $\sim 1$--$2$ KB \\
+Canzone in formato MP3 & $\sim 3$--$10$ MB \\
+Foto scattata con uno smartphone & $\sim 3$--$8$ MB \\
+La stessa foto caricata su Instagram & $\sim 200$--$800$ KB \\
+Foto ad altissima risoluzione & $\sim 50$--$100$ MB \\
+DNA di una persona (genoma umano completo, come sequenza di basi) & $\sim 1$--$2$ GB \\
+Videogioco moderno (FIFA, COD, GTA) & $\sim 100$ GB \\
+Tutte le canzoni su Spotify (stima) & $\sim 500$--$1500$ TB \\
+Dati prodotti dagli esperimenti del CERN in un anno & $\sim 10$ PB \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+
+\subsection{Numero di stati rappresentabili}
+
+Con $n$ bit è possibile rappresentare $2^n$ configurazioni diverse. Ogni bit può assumere 2 valori, quindi le combinazioni totali si ottengono moltiplicando:
+\[
+2 \cdot 2 \cdot 2 \cdots 2 = 2^n
+\]
+\newpage
+In maniera molto intuitiva:
+\begin{itemize}
+  \item con 1 bit → 2 stati (0,1)
+  \item con 2 bit → 4 stati (00,01,10,11)
+  \item con 3 bit → 8 stati
+  \item con 8 bit → 256 stati
+  \item con 16 bit → 65536 stati
+\end{itemize}
+
+Questa formula è alla base di tutte le scelte di codifica: numero di colori rappresentabili, caratteri possibili, livelli di intensità sonora, ecc.
+
+\subsection{Quantità di informazione e scelta del numero di bit}
+
+Maggiore è il numero di stati da distinguere, maggiore deve essere il numero di bit utilizzati. Ad esempio:
+\begin{itemize}
+  \item per rappresentare i numeri da 0 a 9 non basta usare 3 bit (8 stati), sono necessari almeno 4 bit (16 stati), anche se alcuni rimangono inutilizzati.
+  \item per rappresentare tutti i caratteri di base di una tastiera vengono usati 7 o 8 bit.
+  \item per rappresentare un colore in formato RGB a 24 bit vengono sfruttati 8 bit per ciascuno dei tre canali (rosso, verde, blu).
+\end{itemize}
+
+\subsubsection*{Perché proprio 1 byte = 8 bit?}
+Nei primi calcolatori (dal 1950) non esisteva una dimensione ``giusta'' per il gruppo di bit: furono sperimentate soluzioni con 6, 7, 9 bit e oltre. Il blocco da 8 bit si è però imposto nel tempo come standard perché rappresenta un buon compromesso tra semplicità hardware e capacità informativa.
+
+Con 8 bit si hanno infatti $2^8 = 256$ combinazioni possibili. Questo numero di stati è sufficiente a rappresentare:
+\begin{itemize}
+  \item le lettere maiuscole e minuscole dell'alfabeto inglese;
+  \item le cifre da 0 a 9;
+  \item la punteggiatura e vari simboli speciali;
+  \item alcuni codici di controllo (ad esempio invio, lo spazio, ecc.).
+\end{itemize}
+Inoltre, 8 è una potenza di 2 ($2^3 = 8$).
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{I sistemi di numerazione posizionale}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Per comprendere il sistema binario risulta utile definire il funzionamento del sistema decimale.
+
+\subsection{Sistema decimale}
+
+Il sistema decimale si basa su 10 simboli distinti. Il valore di una cifra dipende quindi sia dal simbolo ma soprattutto dalla sua posizione.
+Volendo formalizzare, nel sistema di numerazione decimale:
+\begin{itemize}
+  \item sono disponibili 10 \textbf{simboli}: $[0,1,2,3,4,5,6,7,8,9]$
+  \item ogni \textbf{posizione} rappresenta una differente \textbf{potenza} di 10.
+\end{itemize}
+Ad esempio, il numero $472$ può essere inteso come:
+\[
+472 = 400 + 70 + 2 = 4 \cdot 10^2 + 7 \cdot 10^1 + 2 \cdot 10^0
+\]
+
+
+\subsection{Definizione di sistema posizionale}
+Il sistema decimale non è l'unico sistema di numerazione posizionale, è solamente l'unico che utilizziamo quotidianamente. A seconda del numero di simboli disponibili (chiamato base) è possibile definire sistemi di numerazione posizionali differenti.\\\\
+Più in generale, un sistema di numerazione posizionale è caratterizzato da:
+\begin{itemize}
+  \item una base $b$ (numero di simboli disponibili);
+  \item un insieme di $b$ simboli differenti;
+  \item il valore di ciascuna cifra è dato dalla cifra stessa moltiplicata per una potenza della base.
+\end{itemize}
+Un numero generico in base $b$ può essere scritto come:
+\[
+(a_n a_{n-1} \dots a_1 a_0)_b
+\]
+e interpretato come:
+\[
+ a_n b^n + a_{n-1} b^{n-1} + \dots + a_1 b^1 + a_0 b^0
+\]
+
+\newpage
+\section{Sistema binario}
+
+Il sistema binario utilizza base 2. Le cifre possibili sono solo due:
+\begin{center}
+0 e 1
+\end{center}
+
+Come per il sistema decimale, anche nel sistema binario il valore di una cifra dipende:
+\begin{itemize}
+  \item dal \textbf{simbolo} (0 oppure 1);
+  \item dalla sua \textbf{posizione} (più a destra o più a sinistra).
+\end{itemize}
+
+Ogni posizione rappresenta una potenza di 2:
+\[
+\dots, 2^4, 2^3, 2^2, 2^1, 2^0
+\]
+
+\subsubsection*{Tutte le possibilità con pochi bit}
+
+Per vedere concretamente come funziona il sistema binario, è utile elencare tutte le combinazioni possibili con un certo numero di bit e il loro valore decimale.
+
+\paragraph{Con 1 bit}
+
+Con un solo bit abbiamo soltanto 2 configurazioni possibili:
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+Bit & Valore decimale \\
+\midrule
+0 & 0 \\
+1 & 1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Con 2 bit}
+
+Con 2 bit le configurazioni possibili diventano \(2^2 = 4\).
+
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+Bit (binario) & Valore decimale \\
+\midrule
+00 & 0 \\
+01 & 1 \\
+10 & 2 \\
+11 & 3 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Con 3 bit}
+
+Con 3 bit le configurazioni possibili sono \(2^3 = 8\). Possiamo elencarle in ordine:
+
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+Bit (binario) & Valore decimale \\
+\midrule
+000 & 0 \\
+001 & 1 \\
+010 & 2 \\
+011 & 3 \\
+100 & 4 \\
+101 & 5 \\
+110 & 6 \\
+111 & 7 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Si nota che:
+\begin{itemize}
+  \item ogni volta che aggiungiamo un bit in più, il numero di combinazioni raddoppia;
+  \item con 1 bit rappresentiamo i numeri da 0 a 1;
+  \item con 2 bit rappresentiamo i numeri da 0 a 3;
+  \item con 3 bit rappresentiamo i numeri da 0 a 7.
+\end{itemize}
+
+In generale, con \(n\) bit possiamo rappresentare \(2^n\) configurazioni diverse, cioè tutti i numeri interi da 0 fino a \(2^n - 1\).
+
+
+
+\subsection{Conversione binario -- decimale}
+
+La conversione da binario a decimale segue direttamente la definizione di sistema posizionale.\\\\
+\textbf{Procedura}
+\begin{enumerate}
+  \item si scrive il numero binario separando le cifre;
+  \item si associa a ogni cifra la potenza di 2 corrispondente (partendo da destra con $2^0$);
+  \item si moltiplica ogni cifra (0 o 1) per la propria potenza di 2;
+  \item si sommano i risultati.
+\end{enumerate}
+
+\paragraph{Esempio 1} Conversione di \(1101_2\) in decimale.
+\[
+\begin{aligned}
+1101_2 &= 1 \cdot 2^3 + 1 \cdot 2^2 + 0 \cdot 2^1 + 1 \cdot 2^0 \\
+       &= 8 + 4 + 0 + 1 = 13_{10}
+\end{aligned}
+\]
+
+\paragraph{Esempio 2} Conversione di \(1010_2\) in decimale.
+\[
+\begin{aligned}
+1010_2 &= 1 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 0 \cdot 2^0 \\
+       &= 8 + 0 + 2 + 0 = 10_{10}
+\end{aligned}
+\]
+
+\paragraph{Esempio 3} Conversione di \(100000_2\) in decimale.
+\[
+\begin{aligned}
+100000_2 &= 1 \cdot 2^5 + 0 \cdot 2^4 + 0 \cdot 2^3 + 0 \cdot 2^2 + 0 \cdot 2^1 + 0 \cdot 2^0 \\
+         &= 32 + 0 + 0 + 0 + 0 + 0 = 32_{10}
+\end{aligned}
+\]
+
+\paragraph{Esempio 4} Conversione di \(11111111_2\) in decimale.
+\[
+\begin{aligned}
+11111111_2 &= 1 \cdot 2^7 + 1 \cdot 2^6 + 1 \cdot 2^5 + 1 \cdot 2^4 + 1 \cdot 2^3 + 1 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 \\
+           &= 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255_{10}
+\end{aligned}
+\]
+
+\newpage
+\subsection{Conversione decimale -- binario}
+Il metodo più comune per la conversione da decimale a binario si basa su \textbf{divisioni successive} per 2.\\
+\textbf{Procedura}
+\begin{enumerate}
+  \item si divide il numero decimale per 2;
+  \item si registra il resto (0 o 1);
+  \item si sostituisce il numero con il quoziente della divisione;
+  \item si ripete fino a ottenere quoziente 0;
+  \item si leggono i resti dal basso verso l'alto.
+\end{enumerate}
+
+\paragraph{Esempio 1}
+Conversione di $19_{10}$ in binario.
+\[
+\begin{aligned}
+19 : 2 &= 9 \quad \text{e resto } 1 \\
+9 : 2  &= 4 \quad \text{e resto } 1 \\
+4 : 2  &= 2 \quad \text{e resto } 0 \\
+2 : 2  &= 1 \quad \text{e resto } 0 \\
+1 : 2  &= 0 \quad \text{e resto } 1
+\end{aligned}
+\]
+Lettura dei resti dal basso verso l'alto:
+\[
+19_{10} = (10011)_2
+\]
+
+\paragraph{Esempio 2}
+Conversione di $25_{10}$ in binario.
+\[
+\begin{aligned}
+25 : 2 &= 12 \quad \text{e resto } 1 \\
+12 : 2 &= 6 \quad \text{e resto } 0 \\
+6 : 2  &= 3 \quad \text{e resto } 0 \\
+3 : 2  &= 1 \quad \text{e resto } 1 \\
+1 : 2  &= 0 \quad \text{e resto } 1
+\end{aligned}
+\]
+Lettura dei resti dal basso verso l'alto:
+\[
+25_{10} = (11001)_2
+\]
+
+\paragraph{Esempio 3}
+Conversione di $255_{10}$ in binario.
+\[
+\begin{aligned}
+255 : 2 &= 127 \quad \text{e resto } 1 \\
+127 : 2 &= 63  \quad \text{e resto } 1 \\
+63 : 2  &= 31  \quad \text{e resto } 1 \\
+31 : 2  &= 15  \quad \text{e resto } 1 \\
+15 : 2  &= 7   \quad \text{e resto } 1 \\
+7 : 2   &= 3   \quad \text{e resto } 1 \\
+3 : 2   &= 1   \quad \text{e resto } 1 \\
+1 : 2   &= 0   \quad \text{e resto } 1
+\end{aligned}
+\]
+Lettura dei resti dal basso verso l'alto:
+\[
+255_{10} = (11111111)_2
+\]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Il sistema esadecimale}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Definizione}
+
+Il sistema esadecimale utilizza base 16. Ciò significa che vengono impiegati 16 simboli distinti:
+\begin{itemize}
+  \item le cifre decimali da 0 a 9;
+  \item le lettere maiuscole da A a F.
+\end{itemize}
+Le lettere rappresentano i valori decimali da 10 a 15, come mostrato nella tabella rappresentante tutti i simboli del sistema di numerazione esadecimale:
+
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+Simbolo & Valore decimale \\
+\midrule
+0 & 0 \\
+1 & 1 \\
+2 & 2 \\
+3 & 3 \\
+4 & 4 \\
+5 & 5 \\
+6 & 6 \\
+7 & 7 \\
+8 & 8 \\
+9 & 9 \\
+A & 10 \\
+B & 11 \\
+C & 12 \\
+D & 13 \\
+E & 14 \\
+F & 15 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection*{Esempi di numeri esadecimali}
+
+Per familiarizzare con questa scrittura, ecco alcuni esempi di numeri esadecimali con la loro corrispondenza in decimale e binario:
+
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Esadecimale & Decimale & Binario \\
+\midrule
+0 & 0 & 0000 \\
+9 & 9 & 1001 \\
+A & 10 & 1010 \\
+F & 15 & 1111 \\
+1F & 31 & 0001\ 1111 \\
+2A & 42 & 0010\ 1010 \\
+7F & 127 & 0111\ 1111 \\
+FF & 255 & 1111\ 1111 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Come si nota, più cifre esadecimali permettono di rappresentare numeri più grandi in modo molto più compatto rispetto al binario.
+
+\subsection{Perchè utilizzare l'esadecimale}
+
+La scrittura binaria di numeri lunghi risulta poco leggibile e difficile da controllare a colpo d'occhio. L'esadecimale offre:
+
+\begin{itemize}
+  \item una \textbf{forma più compatta}: riduce la lunghezza delle sequenze rispetto al binario;
+  \item una \textbf{maggiore leggibilità} per esseri umani in contesti tecnici, senza avere a che fare con lunghe sequenze di 0 e 1;
+  \item una \textbf{relazione diretta con il binario}: la conversione avviene per gruppi di 4 bit, senza calcoli complessi.
+\end{itemize}
+
+\subsubsection*{Collegamento con il binario}
+La base 16, quindi l'utilizzo di 16 simboli, risulta particolarmente comoda in ambito informatico per il legame diretto con la base 2 e quindi con il sistema binario. Il motivo è che con 4 bit è possibile rappresentare esattamente 16 valori distinti:
+\[
+2^4 = 16
+\]
+Questa uguaglianza implica che \textbf{ogni gruppo di 4 bit} può essere rappresentato con una \textbf{singola cifra esadecimale} e viceversa.
+
+\subsubsection*{Tabella di corrispondenza tra ogni cifra esadecimale e 4 bit}
+
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+Binario & Esadecimale \\
+\midrule
+0000 & 0 \\
+0001 & 1 \\
+0010 & 2 \\
+0011 & 3 \\
+0100 & 4 \\
+0101 & 5 \\
+0110 & 6 \\
+0111 & 7 \\
+1000 & 8 \\
+1001 & 9 \\
+1010 & A \\
+1011 & B \\
+1100 & C \\
+1101 & D \\
+1110 & E \\
+1111 & F \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\newpage
+\subsection{Conversione esadecimale -- decimale}
+
+La conversione da esadecimale a decimale si basa sulla natura dei sistemi posizionali, per cui il peso di una cifra dipende dalla sua posizione.
+
+\paragraph{Procedura}
+\begin{enumerate}
+  \item Scrivere il numero esadecimale separando le cifre.
+  \item Sostituire ciascuna cifra con il suo valore decimale (da 0 a 15).
+  \item Moltiplicare ogni valore per la potenza di 16 corrispondente alla posizione (partendo da destra con $16^0$).
+  \item Sommare tutti i risultati.
+\end{enumerate}
+
+\paragraph{Esempio 1} Conversione di \(2A_{16}\) in decimale.
+\begin{align*}
+2A_{16} &= 2 \cdot 16^1 + A \cdot 16^0 \\
+        &= 2 \cdot 16 + 10 \cdot 1 \\
+        &= 32 + 10 = 42_{10}
+\end{align*}
+
+\paragraph{Esempio 2} Conversione di \(3F_{16}\) in decimale.
+\begin{align*}
+3F_{16} &= 3 \cdot 16^1 + F \cdot 16^0 \\
+        &= 3 \cdot 16 + 15 \cdot 1 \\
+        &= 48 + 15 = 63_{10}
+\end{align*}
+
+\paragraph{Esempio 3} Conversione di \(1C4_{16}\) in decimale.
+\begin{align*}
+1C4_{16} &= 1 \cdot 16^2 + C \cdot 16^1 + 4 \cdot 16^0 \\
+         &= 1 \cdot 256 + 12 \cdot 16 + 4 \cdot 1 \\
+         &= 256 + 192 + 4 = 452_{10}
+\end{align*}
+
+\newpage
+\subsection{Conversione decimale -- esadecimale}
+
+La conversione da decimale a esadecimale si effettua con il metodo delle \textbf{divisioni successive per 16}.
+
+\paragraph{Procedura}
+\begin{enumerate}
+  \item Dividere il numero decimale per 16.
+  \item Registrare il resto (da 0 a 15, che può corrispondere a una cifra esadecimale).
+  \item Sostituire il numero con il quoziente.
+  \item Ripetere finché il quoziente diventa 0.
+  \item Leggere i resti dal basso verso l'alto e tradurli in cifre esadecimali (0–9, A–F).
+\end{enumerate}
+
+\paragraph{Esempio 1}
+Conversione di \(42_{10}\) in esadecimale.
+\[
+\begin{aligned}
+42 : 16 &= 2 \quad \text{resto } 10 \ (A) \\
+2 : 16  &= 0 \quad \text{resto } 2
+\end{aligned}
+\]
+Lettura dei resti dal basso verso l'alto:
+\[
+42_{10} = (2A)_{16}
+\]
+
+\paragraph{Esempio 2}
+Conversione di \(255_{10}\) in esadecimale.
+\[
+\begin{aligned}
+255 : 16 &= 15 \quad \text{resto } 15 \ (F) \\
+15 : 16  &= 0 \quad \text{resto } 15 \ (F)
+\end{aligned}
+\]
+Lettura dei resti dal basso verso l'alto:
+\[
+255_{10} = (FF)_{16}
+\]
+
+\paragraph{Esempio 3}
+Conversione di \(452_{10}\) in esadecimale.
+\[
+\begin{aligned}
+452 : 16 &= 28 \quad \text{resto } 4 \\
+28 : 16  &= 1 \quad \text{resto } 12 \ (C) \\
+1 : 16   &= 0 \quad \text{resto } 1
+\end{aligned}
+\]
+Lettura dei resti dal basso verso l'alto:
+\[
+452_{10} = (1C4)_{16}
+\]
+
+\newpage
+\subsection{Conversione binario -- esadecimale}
+
+Le conversioni binario -- esadecimale e viceversa partono sempre dall'assunto che 4 bit rappresentano esattamente una cifra esadecimale.
+
+\paragraph{Procedura}
+\begin{enumerate}
+  \item Raggruppare i bit in blocchi da 4 a partire da destra (perchè 4 bit = 16 combinazioni esattamente come 1 cifra esadecimale). Se necessario si aggiungono zeri a sinistra nel primo blocco;
+  \item Per ciascun blocco di 4 bit individuare il valore decimale corrispondente;
+  \item Convertire il valore decimale in cifra esadecimale (0-9, A-F);
+  \item Scrivere le cifre esadecimali nello stesso ordine.
+\end{enumerate}
+
+\paragraph{Esempio 1}
+
+Conversione di \((10110110)_2\) in esadecimale.
+
+\[
+10110110_2
+\]
+
+Raggruppamento in blocchi da 4 bit partendo da destra:
+\[
+1011 \quad 0110
+\]
+
+Calcolo del valore decimale di ciascun blocco:
+\begin{align*}
+1011_2 &= 1 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 \\
+       &= 8 + 0 + 2 + 1 = 11_{10} \\
+0110_2 &= 0 \cdot 2^3 + 1 \cdot 2^2 + 1 \cdot 2^1 + 0 \cdot 2^0 \\
+       &= 0 + 4 + 2 + 0 = 6_{10}
+\end{align*}
+
+Conversione in cifre esadecimali:
+\[
+11_{10} = B_{16}, \quad 6_{10} = 6_{16}
+\]
+
+Quindi:
+\[
+(10110110)_2 = (B6)_{16}
+\]
+
+\paragraph{Esempio 2}
+
+Conversione di \((1100101)_2\) in esadecimale.
+
+Il numero possiede 7 bit, non un multiplo di 4. Si completa il blocco più a sinistra aggiungendo uno zero:
+\[
+(1100101)_2 = (0110\ 0101)_2
+\]
+
+Blocchi da 4 bit:
+\[
+0110 \quad 0101
+\]
+
+Calcolo del valore decimale di ciascun blocco:
+\begin{align*}
+0110_2 &= 0 \cdot 2^3 + 1 \cdot 2^2 + 1 \cdot 2^1 + 0 \cdot 2^0 \\
+       &= 0 + 4 + 2 + 0 = 6_{10} \\
+0101_2 &= 0 \cdot 2^3 + 1 \cdot 2^2 + 0 \cdot 2^1 + 1 \cdot 2^0 \\
+       &= 0 + 4 + 0 + 1 = 5_{10}
+\end{align*}
+
+Conversione in cifre esadecimali:
+\[
+6_{10} = 6_{16}, \quad 5_{10} = 5_{16}
+\]
+
+Quindi:
+\[
+(1100101)_2 = (65)_{16}
+\]
+
+\paragraph{Esempio 3}
+
+Conversione di \((111100001010)_2\) in esadecimale.
+
+\[
+111100001010_2
+\]
+
+Raggruppamento in blocchi da 4 bit:
+\[
+1111 \quad 0000 \quad 1010
+\]
+
+Calcolo del valore decimale di ciascun blocco:
+\begin{align*}
+1111_2 &= 1 \cdot 2^3 + 1 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 \\
+       &= 8 + 4 + 2 + 1 = 15_{10} \\
+0000_2 &= 0 \cdot 2^3 + 0 \cdot 2^2 + 0 \cdot 2^1 + 0 \cdot 2^0 \\
+       &= 0 + 0 + 0 + 0 = 0_{10} \\
+1010_2 &= 1 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 0 \cdot 2^0 \\
+       &= 8 + 0 + 2 + 0 = 10_{10}
+\end{align*}
+
+Conversione in cifre esadecimali:
+\[
+15_{10} = F_{16}, \quad 0_{10} = 0_{16}, \quad 10_{10} = A_{16}
+\]
+
+Quindi:
+\[
+(111100001010)_2 = (F0A)_{16}
+\]
+
+\paragraph{Esempio 4}
+
+Conversione di \((10000000)_2\) in esadecimale.
+
+\[
+10000000_2
+\]
+
+Raggruppamento in blocchi da 4 bit:
+\[
+1000 \quad 0000
+\]
+
+Calcolo del valore decimale di ciascun blocco:
+\begin{align*}
+1000_2 &= 1 \cdot 2^3 + 0 \cdot 2^2 + 0 \cdot 2^1 + 0 \cdot 2^0 \\
+       &= 8 + 0 + 0 + 0 = 8_{10} \\
+0000_2 &= 0 \cdot 2^3 + 0 \cdot 2^2 + 0 \cdot 2^1 + 0 \cdot 2^0 \\
+       &= 0 + 0 + 0 + 0 = 0_{10}
+\end{align*}
+
+Conversione in cifre esadecimali:
+\[
+8_{10} = 8_{16}, \quad 0_{10} = 0_{16}
+\]
+
+Quindi:
+\[
+(10000000)_2 = (80)_{16}
+\]
+
+\subsection{Conversione esadecimale -- binario}
+Le conversioni binario -- esadecimale e viceversa partono sempre dall'assunto che 4 bit rappresentano esattamente una cifra esadecimale.
+
+\paragraph{Procedura}
+Per ogni cifra esadecimale:
+\begin{enumerate}
+  \item Ottenere il numero decimale corrispondente;
+  \item Trasformare il numero decimale ottenuto in un blocco di 4 bit, tramite il metodo delle divisioni successive o la tabella di corrispondenza;
+  \item Concatenare i blocchi ottenuti.
+\end{enumerate}
+
+% --- SEZIONE MIGLIORATA: Conversione esadecimale → binario con calcoli intermedi ---
+\paragraph{Esempio 1}
+
+Conversione di \((3F)_{16}\) in binario.
+
+\begin{itemize}
+  \item Prima cifra: \(3_{16}\)
+    \begin{itemize}
+      \item Valore decimale: \(3_{16} = 3_{10}\)
+      \item Conversione in binario a 4 bit:
+        \begin{align*}
+        3 : 2 = 1 \quad \text{resto } 1 \\
+        1 : 2 = 0 \quad \text{resto } 1 \\
+        \end{align*}
+        Scrivendo i resti dal basso verso l'alto: \(11_2\), che diventa \(0011_2\) (aggiungendo due zeri a sinistra per ottenere 4 bit).
+    \end{itemize}
+  \item Seconda cifra: \(F_{16}\)
+    \begin{itemize}
+      \item Valore decimale: \(F_{16} = 15_{10}\)
+      \item Conversione in binario a 4 bit:
+        \begin{align*}
+        15 : 2 = 7 \quad \text{resto } 1 \\
+        7 : 2 = 3 \quad \text{resto } 1 \\
+        3 : 2 = 1 \quad \text{resto } 1 \\
+        1 : 2 = 0 \quad \text{resto } 1 \\
+        \end{align*}
+        Resti dal basso verso l'alto: \(1111_2\)
+    \end{itemize}
+\end{itemize}
+
+Concatenando i blocchi:
+\[
+(3F)_{16} = (0011\ 1111)_2 = (00111111)_2
+\]
+
+\paragraph{Esempio 2}
+
+Conversione di \((A2)_{16}\) in binario.
+
+\begin{itemize}
+  \item Prima cifra: \(A_{16}\)
+    \begin{itemize}
+      \item Valore decimale: \(A_{16} = 10_{10}\)
+      \item Conversione in binario a 4 bit:
+        \begin{align*}
+        10 : 2 = 5 \quad \text{resto } 0 \\
+        5 : 2 = 2 \quad \text{resto } 1 \\
+        2 : 2 = 1 \quad \text{resto } 0 \\
+        1 : 2 = 0 \quad \text{resto } 1 \\
+        \end{align*}
+        Resti dal basso verso l'alto: \(1010_2\)
+    \end{itemize}
+  \item Seconda cifra: \(2_{16}\)
+    \begin{itemize}
+      \item Valore decimale: \(2_{16} = 2_{10}\)
+      \item Conversione in binario a 4 bit:
+        \begin{align*}
+        2 : 2 = 1 \quad \text{resto } 0 \\
+        1 : 2 = 0 \quad \text{resto } 1 \\
+        \end{align*}
+        Resti dal basso verso l'alto: \(10_2\), che diventa \(0010_2\) (aggiungendo due zeri a sinistra).
+    \end{itemize}
+\end{itemize}
+
+Concatenando i blocchi:
+\[
+(A2)_{16} = (1010\ 0010)_2 = (10100010)_2
+\]
+
+\paragraph{Esempio 3}
+
+Conversione di \((7B)_{16}\) in binario.
+
+\begin{itemize}
+  \item Prima cifra: \(7_{16}\)
+    \begin{itemize}
+      \item Valore decimale: \(7_{16} = 7_{10}\)
+      \item Conversione in binario a 4 bit:
+        \begin{align*}
+        7 : 2 = 3 \quad \text{resto } 1 \\
+        3 : 2 = 1 \quad \text{resto } 1 \\
+        1 : 2 = 0 \quad \text{resto } 1 \\
+        \end{align*}
+        Resti dal basso verso l'alto: \(111_2\), che diventa \(0111_2\) (aggiungendo uno zero a sinistra).
+    \end{itemize}
+  \item Seconda cifra: \(B_{16}\)
+    \begin{itemize}
+      \item Valore decimale: \(B_{16} = 11_{10}\)
+      \item Conversione in binario a 4 bit:
+        \begin{align*}
+        11 : 2 = 5 \quad \text{resto } 1 \\
+        5 : 2 = 2 \quad \text{resto } 1 \\
+        2 : 2 = 1 \quad \text{resto } 0 \\
+        1 : 2 = 0 \quad \text{resto } 1 \\
+        \end{align*}
+        Resti dal basso verso l'alto: \(1011_2\)
+    \end{itemize}
+\end{itemize}
+
+Concatenando i blocchi:
+\[
+(7B)_{16} = (0111\ 1011)_2 = (01111011)_2
+\]
+
+\paragraph{Esempio 4}
+
+Conversione di \((FF)_{16}\) in binario.
+
+\begin{itemize}
+  \item Prima cifra: \(F_{16}\)
+    \begin{itemize}
+      \item Valore decimale: \(F_{16} = 15_{10}\)
+      \item Conversione in binario a 4 bit:
+        \begin{align*}
+        15 : 2 = 7 \quad \text{resto } 1 \\
+        7 : 2 = 3 \quad \text{resto } 1 \\
+        3 : 2 = 1 \quad \text{resto } 1 \\
+        1 : 2 = 0 \quad \text{resto } 1 \\
+        \end{align*}
+        Resti dal basso verso l'alto: \(1111_2\)
+    \end{itemize}
+  \item Seconda cifra: \(F_{16}\) (stesso calcolo)
+    \begin{itemize}
+      \item Valore decimale: \(F_{16} = 15_{10}\)
+      \item Conversione in binario a 4 bit: \(1111_2\)
+    \end{itemize}
+\end{itemize}
+
+Concatenando i blocchi:
+\[
+(FF)_{16} = (1111\ 1111)_2 = (11111111)_2
+\]
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Logica booleana}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\subsection{Decisioni sì/no}
+%
+%Nella vita quotidiana le decisioni spesso dipendono da condizioni che %possono essere considerate vere o false.
+%
+%Esempi:
+%\begin{itemize}
+%  \item ``se piove, allora si usa l'ombrello'';
+%  \item ``se l'età è maggiore o uguale a 18, allora è consentito %votare'';
+%  \item ``se la batteria è scarica, allora si ricarica il %dispositivo''.
+%\end{itemize}
+%
+%Ogni affermazione del tipo ``condizione → azione'' può essere %formalizzata con la logica booleana.
+%
+%\subsection{Variabile booleana}
+%
+%Una \textbf{variabile booleana} può assumere solo due valori:
+%\begin{itemize}
+%  \item vero (spesso indicato con 1);
+%  \item falso (spesso indicato con 0).
+%\end{itemize}
+%
+%Questo modello è perfettamente compatibile con la rappresentazione %mediante bit.
+%
+%\subsection{Operatori logici fondamentali}
+%
+%Gli operatori logici di base sono:
+%\begin{description}
+%  \item[NOT] (negazione): inverte il valore di verità.
+%  \item[AND] (congiunzione): è vero solo se entrambe le condizioni %sono vere.
+%  \item[OR] (disgiunzione inclusiva): è vero se almeno una delle %condizioni è vera.
+%\end{description}
+%
+%\subsection{Tabelle di verità}
+%Le tabelle di verità descrivono il comportamento di un operatore %logico rispetto a tutti i possibili input.
+%
+%\bigskip
+%
+%\noindent\textbf{Operatore NOT (negazione)}
+%
+%L'operatore NOT inverte il valore logico della variabile: il vero %diventa falso e il falso diventa vero.
+%
+%\[
+%\begin{array}{c|c}
+%A & \text{NOT } A \\
+%\hline
+%0 & 1 \\
+%1 & 0
+%\end{array}
+%\]
+%
+%\bigskip
+%
+%\noindent\textbf{Operatore AND (congiunzione)}
+%
+%L'operatore AND restituisce vero solo quando entrambe le variabili %assumono valore vero.
+%
+%\[
+%\begin{array}{c|c|c}
+%A & B & A \land B \\
+%\hline
+%0 & 0 & 0 \\
+%0 & 1 & 0 \\
+%1 & 0 & 0 \\
+%1 & 1 & 1
+%\end{array}
+%\]
+%
+%\bigskip
+%
+%\noindent\textbf{Operatore OR (disgiunzione)}
+%
+%L'operatore OR restituisce vero quando almeno una delle due variabili %è vera.
+%
+%\[
+%\begin{array}{c|c|c}
+%A & B & A \lor B \\
+%\hline
+%0 & 0 & 0 \\
+%0 & 1 & 1 \\
+%1 & 0 & 1 \\
+%1 & 1 & 1
+%\end{array}
+%\]
+%
+%\subsection{Proprietà degli operatori logici}
+%
+%Gli operatori AND e OR possiedono diverse proprietà utili nella %semplificazione delle espressioni booleane.
+%
+%\paragraph{Proprietà commutativa}
+%
+%Per AND e OR vale:
+%\[
+%A \land B = B \land A \\
+%A \lor B = B \lor A
+%\]
+%
+%\paragraph{Proprietà associativa}
+%
+%L'ordine di raggruppamento non modifica il risultato:
+%\[
+%(A \land B) \land C = A \land (B \land C) \\
+%(A \lor B) \lor C = A \lor (B \lor C)
+%\]
+%
+%\paragraph{Proprietà distributiva}
+%
+%AND e OR si distribuiscono in modo analogo a moltiplicazione e somma:
+%\[
+%A \land (B \lor C) = (A \land B) \lor (A \land C) \\
+%A \lor (B \land C) = (A \lor B) \land (A \lor C)
+%\]
+%
+%\subsection{Leggi di De Morgan}
+%
+%Le leggi di De Morgan permettono di trasformare la negazione di una %congiunzione in una disgiunzione di negazioni e viceversa:
+%\[
+%\neg(A \land B) = (\neg A) \lor (\neg B) \\
+%\neg(A \lor B) = (\neg A) \land (\neg B)
+%\]
+%
+%Queste trasformazioni risultano fondamentali nella progettazione di %circuiti logici e nella semplificazione di condizioni nei programmi.
+%
+%\subsection{Espressioni booleane}
+%
+%Un'espressione booleana combina variabili booleane e operatori logici.
+%
+%Esempio:
+%\[
+%(A \land B) \lor (\neg C)
+%\]
+%
+%Un'espressione di questo tipo può rappresentare una regola %decisionale, una condizione di controllo o il comportamento di un %circuito.
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Codifica dei caratteri}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Dal simbolo al numero}
+
+Per memorizzare e trasmettere testo, ogni carattere deve essere associato a un codice numerico. Questo codice viene poi rappresentato in binario e memorizzato come sequenza di bit.
+
+\subsubsection*{L'importanza di standard comuni}
+
+Le codifiche caratteri permettono di trasformare un dato in informazione e risultano così importanti perché vengono utilizzate e condivise in tutto il mondo. Se ogni produttore di computer o ogni programma usasse una codifica ``personale'' e diversa dalle altre, lo stesso testo sarebbe diverso da computer a computer, o da nazione a nazione. L'informatica, essendo una disciplina globale, basa tutto il suo mondo sull'utilizzo di standard comuni.\\\\
+Grazie a standard comuni:
+\begin{itemize}
+  \item un file di testo scritto su un computer può essere letto correttamente su un altro;
+  \item messaggi, email e pagine web mantengono gli stessi caratteri, accenti e simboli indipendentemente dal dispositivo;
+  \item è possibile scambiare informazioni tra sistemi diversi senza dover riconvertire continuamente la rappresentazione dei caratteri.
+\end{itemize}
+La presenza di standard condivisi rende quindi possibile la comunicazione digitale su scala globale.
+
+\subsection{Codifica ASCII}
+
+La codifica \textbf{ASCII} (American Standard Code for Information Interchange) è una delle prime standardizzazioni per la rappresentazione dei caratteri. Il suo scopo è associare in modo univoco ad ogni carattere un numero intero.
+
+Caratteristiche principali:
+\begin{itemize}
+  \item utilizzo di 7 bit per carattere (128 possibili simboli, da 0 a 127);
+  \item presenza di lettere maiuscole e minuscole dell'alfabeto inglese;
+  \item cifre da 0 a 9;
+  \item segni di punteggiatura;
+  \item alcuni caratteri di controllo (invio, tabulazione, ecc.).
+\end{itemize}
+
+Il calcolatore non memorizza direttamente le lettere, ma memorizza i \textbf{codici numerici} corrispondenti. La tastiera invia il codice del tasto premuto e il programma visualizza il carattere associato al codice.
+
+Esempi di associazione tra caratteri e codici ASCII:
+
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Carattere & Codice decimale & Codice binario (8 bit) \\
+\midrule
+\code{'0'} & 48 & 00110000 \\
+\code{'1'} & 49 & 00110001 \\
+\code{'A'} & 65 & 01000001 \\
+\code{'B'} & 66 & 01000010 \\
+\code{'a'} & 97 & 01100001 \\
+spazio & 32 & 00100000 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+ASCII è stato progettato per l'inglese. Non include le lettere accentate, caratteri di alfabeti non latini, simboli di lingue asiatiche o emoji. Con la diffusione globale dei calcolatori è diventato necessario utilizzare sistemi che permettessero di rappresentare molti più simboli. Oggi, quindi, la codifica ASCII non è più molto utilizzata. Altrimenti non potremmo rappresentare le emoji, limitandoci ad esempio a questo :D
+
+
+\begin{center}
+\includegraphics[width=1\textwidth]{images/ascii-table.jpg}
+
+\emph{Tabella ASCII completa}
+\end{center}
+
+
+\subsubsection*{Esempio completo: da testo a numeri}
+
+Si consideri la frase:
+\begin{center}
+\code{"ciao a tutti"}
+\end{center}
+
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+Carattere & Codice decimale ASCII \\
+\midrule
+\code{'c'} & 99 \\
+\code{'i'} & 105 \\
+\code{'a'} & 97 \\
+\code{'o'} & 111 \\
+spazio     & 32 \\
+\code{'a'} & 97 \\
+spazio     & 32 \\
+\code{'t'} & 116 \\
+\code{'u'} & 117 \\
+\code{'t'} & 116 \\
+\code{'t'} & 116 \\
+\code{'i'} & 105 \\
+\bottomrule
+\end{tabular}
+\end{center}
+Seguendo la tabella ASCII, la frase \code{"ciao a tutti"} viene memorizzata come una sequenza di numeri:
+\[
+\text{``ciao a tutti''} \rightarrow 99\;105\;97\;111\;32\;97\;32\;116\;117\;116\;116\;105
+\]
+In codice binario, quindi sul nostro computer, la frase è rappresentata in questa maniera:
+\[
+\begin{aligned}
+\text{``ciao a tutti''} \rightarrow\ &01100011\;01101001\;01100001\;01101111\;00100000\;01100001\\
+                                     &00100000\;01110100\;01110101\;01110100\;01110100\;01101001
+\end{aligned}
+\]
+
+\subsubsection*{L'astrazione che ritorna}
+Quello che al nostro occhio appare come una sequenza di lettere e spazi, per il calcolatore è solamente una sequenza di segnali elettrici (0 e 1). Anche in questo caso possiamo parlare di \textbf{astrazione}. Nascondiamo i segnali elettrici, nascondiamo i bit e i numeri della tabella ASCII, rimane il livello umano, quello (per noi) semplice da capire e veramente utile.
+
+
+\newpage
+\subsection{Unicode}
+
+La codifica ASCII, mette a disposizione 128 possibili caratteri, ma ad oggi, tra lettere accentate, alfabeti diversi (greco, cirillico, arabo, ecc.), simboli matematici, frecce, segni grafici ed emoji, i caratteri da rappresentare sono migliaia.
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{images/unicode.png}
+
+\emph{\textit{"Everyone in the world should be able to use their own language on phones and computers."}}
+\end{center}
+
+\textbf{Unicode} nasce per oltrepassare i limiti della codifica ASCII e permettere di utilizzare i computer non solo dalle persone che scrivono in inglese. L'idea alla base di Unicode è simile a quella di ASCII: \textbf{ogni simbolo viene associato a un numero}, con la differenza che Unicode non ha limiti rigidi sul numero di simboli rappresentabili, e viene continuamente tenuto aggiornato.
+
+Esso può essere immaginato come un enorme dizionario di simboli, ognuno associato a un numero chiamato \textbf{code point}. Trattando numeri di più grande entità, si utilizza la \textbf{notazione esadecimale} per comodità. L'ultima versione Unicode è la 17.0 di febbraio 2025, rappresentante $297.334$ simboli diversi
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{images/unicode-emoji.png}
+
+\emph{Tabella parziale Unicode rappresentante alcune emoji}
+\end{center}
+
+
+
+
+
+Questo dizionario stabilisce \emph{quali} simboli esistono e \emph{quale} numero li rappresenta, ma non specifica ancora \emph{come} questi numeri vengano memorizzati in termini di byte e bit. Per passare dai code point ai bit veri e propri, quindi alla \textbf{rappresentazione pratica} si usano delle regole chiamate \textbf{codifiche}, la più importante è UTF-8.
+
+
+\subsection{UTF-8}
+
+UTF-8 è una delle possibili \textbf{codifiche} di Unicode. \\\\
+Le sue caratteristiche fondamentali sono:
+\begin{itemize}
+  \item codifica a lunghezza variabile: da 1 a 4 byte per carattere;
+  \item compatibilità con ASCII: i primi 128 caratteri (quelli ASCII) vengono rappresentati con un singolo byte identico ad ASCII;
+  \item caratteri non ASCII (accenti, simboli, emoji) utilizzano 2, 3 o 4 byte.
+\end{itemize}
+
+\subsubsection*{Esempio}
+Di seguito si riporta l'associazione tra alcuni caratteri e i rispettivi code point Unicode. Si nota come UTF-8 rappresenti ciascun carattere con un numero variabile di byte (8 bit ciascuno).
+
+\begin{center}
+\begin{tabular}{>{\ttfamily}c l l}
+\toprule
+Carattere & Code point Unicode & UTF-8 (bit) \\
+\midrule
+'A' & U+0041 & 01000001 \\
+'z' & U+007A & 01111010 \\
+'è' & U+00E8 & 11000011\ 10101000 \\
+'€' & U+20AC & 11100010\ 10000010\ 10101100 \\
+\bottomrule
+\end{tabular}
+\end{center}
+Si osserva che:
+\begin{itemize}
+  \item i caratteri ASCII semplici (come \code{'A'} e \code{'z'}) occupano 1 solo byte;
+  \item caratteri accentati come \code{'è'} richiedono più spazio;
+  \item simboli come \code{'€'} utilizzano ancora più byte;
+\end{itemize}
+Di seguito invece si riportano due parole italiane, una senza caratteri accentati e l'altra con un carattere accentato, per mostrare come la presenza di caratteri speciali influenzi la quantità di memoria occupata.
+
+\begin{center}
+\begin{tabular}{>{\ttfamily}c l}
+\toprule
+Parola & UTF-8 (bit) \\
+\midrule
+"casa"  & 01100011\ 01100001\ 01110011\ 01100001 \\
+"città" & 01100011\ 01101001\ 01110100\ 01110100\ 11000011\ 10100000 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+% --- INIZIO RISPOSTA: Come fa il computer a sapere quanti byte leggere in UTF-8 ---
+\subsubsection*{Come fa il computer a sapere quanti byte leggere?}
+
+Se UTF-8 usa da 1 a 4 byte per carattere, \textbf{come fa il computer a capire quanti byte fanno parte di ciascun carattere}? Non ci sono virgole o spazi tra un carattere e l'altro nel flusso di byte. L'idea è che \textbf{i primi bit del primo byte} di ogni carattere contengono un ``segnale'' che indica quanto è lungo il carattere. 
+
+\subsubsection*{Esempio}
+
+\begin{center}
+\begin{tabular}{>{\ttfamily}c l}
+\toprule
+Simbolo & Rappresentazione in byte \\
+\midrule
+'A'   & 01000001 \\
+'è'   & 11000011\ 10101000 \\
+'€'   & 11100010\ 10000010\ 10101100 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+  \item quando il carattere occupa \textbf{un solo byte}, il primo bit è 0 (\code{'A'});
+  \item quando il carattere occupa \textbf{2 byte}, i primi 2 bit sono 1 (\code{'è'});
+  \item quando il carattere occupa \textbf{3 byte}, i primi 3 bit sono 1 (\code{'è'});
+  \item i byte che seguono un carattere più lungo (secondo, terzo o quarto byte) iniziano sempre con 1. Questo bit prende il nome di \textbf{bit di continuazione}, perchè segnala al computer che \textbf{non} si tratta dell'inizio di un nuovo carattere, ma della continuazione del precedente. 
+\end{itemize}
+Più formalmente, UTF-8 utilizza dei \textbf{pattern di bit} ben precisi per distinguere
+l’inizio di un carattere dai byte di continuazione:
+
+\begin{itemize}
+  \item un carattere codificato su \textbf{1 byte} ha la forma:
+  \[
+  0xxxxxxx
+  \]
+  ed è compatibile con la codifica ASCII;
+
+  \item un carattere codificato su \textbf{2 byte} ha la forma:
+  \[
+  110xxxxx\ 10xxxxxx
+  \]
+
+  \item un carattere codificato su \textbf{3 byte} ha la forma:
+  \[
+  1110xxxx\ 10xxxxxx\ 10xxxxxx
+  \]
+
+  \item un carattere codificato su \textbf{4 byte} ha la forma:
+  \[
+  11110xxx\ 10xxxxxx\ 10xxxxxx\ 10xxxxxx
+  \]
+\end{itemize}
+
+I bit iniziali (\texttt{0}, \texttt{110}, \texttt{1110}, \texttt{11110}) permettono al computer di
+riconoscere immediatamente \textbf{quanti byte} compongono il carattere, mentre i byte di
+continuazione iniziano sempre con la sequenza \texttt{10}, che indica che il byte
+\textbf{non rappresenta l’inizio di un nuovo carattere}.
+
+\medskip
+Una volta stabilito \textbf{quanti byte} usare, i simboli \texttt{x} presenti nei pattern UTF-8
+vengono sostituiti con i \textbf{bit del code point Unicode} del carattere.
+
+Il procedimento è il seguente:
+\begin{enumerate}
+  \item si parte dal \textbf{code point} del carattere, espresso in notazione esadecimale;
+  \item il numero viene convertito prima in \textbf{decimale} e poi in \textbf{binario};
+  \item la sequenza di bit ottenuta viene inserita negli spazi \texttt{x}, partendo da destra,
+  rispettando l’ordine dei byte UTF-8.
+\end{enumerate}
+
+\medskip
+\textbf{Esempio: codifica del carattere \code{'è'}}
+
+Il carattere \code{'è'} ha code point Unicode:
+\[
+\texttt{U+00E8}
+\]
+
+Il valore esadecimale \texttt{00E8} corrisponde al numero decimale:
+\[
+\texttt{00E8}_{16} = 232_{10}
+\]
+
+Espresso in binario:
+\[
+232_{10} = 11101000_2
+\]
+
+Poiché il valore rientra nell’intervallo \texttt{0080--07FF}, UTF-8 utilizza \textbf{2 byte},
+con il pattern:
+\[
+110xxxxx\ 10xxxxxx
+\]
+
+I bit del numero binario vengono inseriti negli \texttt{x} partendo dal byte di destra:
+\[
+\underline{110}\,00011\ \underline{10}\,101000
+\]
+
+Si ottiene quindi la rappresentazione finale in UTF-8:
+\[
+11000011\ 10101000
+\]
+
+\medskip
+\textbf{Esempio: codifica del carattere \code{'€'}}
+
+Il carattere \code{'€'} ha code point Unicode:
+\[
+\texttt{U+20AC}
+\]
+
+Conversione in decimale:
+\[
+\texttt{20AC}_{16} = 8364_{10}
+\]
+
+Conversione in binario:
+\[
+8364_{10} = 0010\,0000\,1010\,1100_2
+\]
+
+Poiché il valore rientra nell’intervallo \texttt{0800--FFFF}, UTF-8 utilizza \textbf{3 byte},
+con il pattern:
+\[
+1110xxxx\ 10xxxxxx\ 10xxxxxx
+\]
+
+I bit del code point vengono distribuiti negli \texttt{x}:
+\[
+\underline{1110}\,0010\ \underline{10}\,000010\ \underline{10}\,101100
+\]
+
+La rappresentazione UTF-8 finale è quindi:
+\[
+11100010\ 10000010\ 10101100
+\]
+
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Codifica delle immagini}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Immagini raster}
+
+Le immagini digitali di uso comune (fotografie, screenshot, immagini mostrate su schermo) sono generalmente rappresentate come una griglia regolare di \textbf{pixel}, ovvero i più piccoli elementi visivi che la costituiscono. Ogni pixel contiene un'informazione relativa al colore.
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{images/raster-graphic.jpg}
+
+\emph{Ingrandimento di un'immagine con evidenza della griglia di pixel.}
+\end{center}
+
+Quando un'immagine raster viene ingrandita oltre una certa soglia, la struttura a pixel diventa visibile, producendo l'effetto ``sgranato''.
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/raster-strawberry.jpeg}
+\end{center}
+
+\subsection{Risoluzione}
+
+La \textbf{risoluzione di un'immagine} indica il numero di pixel presenti in orizzontale e verticale. Determina il livello di dettaglio dell'immagine. \\
+Esempi comuni:
+\begin{itemize}
+  \item 800×600 pixel → bassa definizione
+  \item 1920×1080 pixel → Full HD
+  \item 3840×2160 pixel → 4K
+\end{itemize}
+Più è alta la risoluzione, maggiore è il numero di pixel e quindi il dettaglio dell'immagine. 
+
+
+\subsection{Profondità di colore}
+
+La \textbf{profondità di colore} indica quanti bit vengono utilizzati per rappresentare il colore di ciascun pixel. Valori tipici:
+\begin{itemize}
+  \item 1 bit → solo bianco e nero
+  \item 8 bit → 256 livelli di grigio
+  \item 24 bit → RGB, oltre 16 milioni di colori
+\end{itemize}
+Il numero di colori rappresentabili è dato dal valore: $2^n$
+
+\begin{center}
+\includegraphics[width=0.55\textwidth]{images/bit-depth-example.png}
+\end{center}
+
+\subsection*{Un esempio intuitivo: immagini in bianco e nero}
+
+Per rendere più concreto il legame tra bit e immagini, si può immaginare una piccola figura in bianco e nero come una griglia colorata di bianco o nero. 
+
+
+\begin{center}
+\includegraphics[width=0.1\textwidth]{images/imm_bianconero.png}
+\end{center}
+
+Ogni casella (pixel) può essere solo di due colori (ad esempio bianco o nero) e può quindi essere rappresentata da un singolo bit:
+\begin{itemize}
+  \item 0 \textrightarrow{} pixel bianco;
+  \item 1 \textrightarrow{} pixel nero.
+\end{itemize}
+
+E' possibile quindi identificare l'immagine come una sequenza di bit, in cui ogni bit rappresenta il colore di un pixel nella griglia.
+
+\begin{center}
+\includegraphics[width=0.1\textwidth]{images/imm_bianconero_con_bit.png}
+\end{center}
+
+Possiamo quindi codificare l'immagine come una sequenza di bit, anche senza la griglia, esattamente come avviene all'interno del nostro computer. Ogni cifra della sequenza indica il colore di un pixel nella griglia: la prima riga di bit rappresenta la prima riga di pixel dell'immagine, la seconda riga di bit rappresenta la seconda riga di pixel, e così via.
+Ad esempio, una semplice immagine in bianco e nero potrebbe essere codificata così:
+\begin{center}
+$000000 \quad 010010 \quad 010010 \quad 000000 \quad 011110 \quad 000000$
+\end{center}
+
+\subsection*{Immagini con più colori}
+Quando si passa da immagini in bianco e nero a immagini con più colori, non basta più 1 bit per pixel. Ad esempio, con 2 bit per pixel si possono rappresentare 4 colori diversi. Un possibile schema potrebbe essere:
+
+
+\begin{center}
+\includegraphics[width=0.1\textwidth]{images/4_colori_b_n_g_b.png}
+\end{center}
+
+
+
+La seguente immagine
+\begin{center}
+\includegraphics[width=0.1\textwidth]{images/imm_colorata.png}
+\end{center}
+
+Viene codificata utilizzando, per ogni pixel, 2 bit. 
+
+\begin{center}
+\includegraphics[width=0.1\textwidth]{images/imm_colorata_con_bit.png}
+\end{center}
+
+\begin{center}
+$101010101010 \quad 100010100010 \quad 101110101110 \quad 101010101010 \quad 100101010110 \quad 101010101010$
+\end{center}
+
+
+Si nota come già utilizzando 4 colori, il numero di bit sia raddoppiato rispetto all'immagine precedente in bianco e nero.
+
+Nei dispositivi moderni, però, non ci si ferma certo a 4 colori. Per rappresentare fotografie e immagini sugli schermi si utilizzano in genere \textbf{24 bit per ogni pixel}, cioè \textbf{3 byte}. Il colore di ogni pixel viene descritto combinando tre componenti: rosso, verde e blu (modello \textbf{RGB}), ognuna con 8 bit a disposizione. Con 8 bit si hanno
+\[
+2^8 = 256
+\]
+possibili intensità per ciascun colore di base. Mettendo insieme le tre componenti si ottengono:
+\[
+256 \times 256 \times 256 = 16\,777\,216
+\]
+colori diversi (circa \textbf{16 milioni} di colori). Rispetto alle semplici immagini in bianco e nero, la quantità di bit necessari per rappresentare un'immagine realistica cresce molto, ma in cambio si possono ottenere sfumature e dettagli molto più naturali.
+
+
+\subsubsection*{L'importanza del contesto}
+Perché il computer possa ricostruire correttamente l'immagine, non basta la sequenza di bit: servono anche alcune \textbf{informazioni aggiuntive} (chiamate metadati), come ad esempio:
+\begin{itemize}
+  \item la \textbf{risoluzione} dell'immagine (larghezza e altezza in pixel);
+  \item la \textbf{profondità di colore} (quanti bit vengono usati per rappresentare ogni pixel).
+\end{itemize}
+
+
+\subsection{Immagini vettoriali}
+
+Le \textbf{immagini vettoriali} non sono descritte tramite pixel, ma attraverso formule matematiche che definiscono linee, curve e forme geometriche. Ogni elemento viene rappresentato come oggetto scalabile, il cui aspetto non dipende dalla risoluzione dello schermo.
+
+Grazie a questa caratteristica, l'ingrandimento non comporta perdita di qualità: i contorni rimangono sempre nitidi e privi di sgranature. Questo rende le immagini vettoriali particolarmente adatte per loghi, icone, diagrammi e grafici tecnici.
+
+\begin{center} 
+\includegraphics[width=0.5\textwidth]{images/Vector_vs_raster.png}
+
+\emph{Confronto tra immagine raster e vettoriale a forte ingrandimento.}
+\end{center}
+
+Un comportamento analogo si osserva in molti file PDF: durante lo zoom, testo e linee restano perfettamente definiti perché descritti mediante elementi vettoriali. Se il PDF contiene invece immagini raster, l’ingrandimento evidenzia la struttura a pixel e produce sgranature visibili.
+
+
+\newpage
+\subsection{La fisica dei colori: sintesi sottrattiva e additiva}
+
+\subsubsection*{Il colore nei materiali: sintesi sottrattiva}
+
+Nella stampa e nella pittura i materiali non emettono luce, ma la riflettono.
+Il colore è quindi il risultato di una sintesi sottrattiva, perché i pigmenti assorbono una parte della luce e ne riflettono solo una parte. 
+I \textbf{colori primari} del modello sottrattivo sono: 
+\begin{itemize}
+  \item ciano (C)
+  \item magenta (M)
+  \item giallo (Y).
+\end{itemize}
+Nella pratica vengono spesso indicati in modo semplificato come blu, rosso e giallo.
+
+In questo modello, aggiungendo colori viene assorbita sempre più luce.
+Di conseguenza, combinando più colori si ottengono colori sempre più scuri, fino a tendere al nero. A destra è mostrata una rappresentazione grafica della sintesi sottrattiva.
+
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{images/additive-and-subtractive-colour.png}
+\end{center}
+
+\subsubsection*{Il colore sugli schermi: sintesi additiva}
+
+I dispositivi digitali, come monitor e smartphone, funzionano in modo diverso rispetto alla stampa e alla pittura. Gli schermi \textbf{emettono luce} e non la riflettono. Per questo motivo il colore viene ottenuto tramite \textbf{sintesi additiva}, cioè sommando luce.
+La sintesi additiva si basa su tre colori fondamentali:
+\begin{itemize}
+  \item rosso (R),
+  \item verde (G),
+  \item blu (B).
+\end{itemize}
+
+Combinando questi tre colori con diverse intensità si ottengono tutti gli altri colori.  
+Nella sintesi additiva, aumentando la quantità di luce emessa, il colore risultante tende al \textbf{bianco}.
+
+
+
+\subsection{Pixel e subpixel fisici}
+
+Come visto alla sezione precedente, il colore sugli schermi si ottiene sommando luce.
+Questa somma avviene fisicamente all’interno dei \textbf{pixel} che compongono lo schermo.
+
+Sugli schermi digitali (monitor, smartphone, tablet, TV) l'immagine è formata da una griglia di \textbf{pixel}.  
+Ogni pixel non è un elemento indivisibile, ma è composto da tre \textbf{subpixel} luminosi:
+\begin{itemize}
+  \item un subpixel rosso (R),
+  \item un subpixel verde (G),
+  \item un subpixel blu (B).
+\end{itemize}
+
+Nell'immagine sottostante è mostrato l’ingrandimento di due schermi digitali, 
+in cui sono visibili i singoli subpixel rossi, verdi e blu che costituiscono ogni pixel.
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/subpixel.png}
+\end{center}
+
+Ogni subpixel può emettere luce con intensità variabile.  
+Il colore finale del pixel dipende dalla quantità di luce emessa da ciascun subpixel.
+
+Ad esempio, se è acceso solo il subpixel rosso e gli altri due sono spenti, il pixel appare rosso.  
+Combinando la luce emessa dai tre subpixel con diverse intensità si ottengono tutti i colori visualizzati sullo schermo.
+
+\subsection{Il modello RGB numerico}
+Dal punto di vista informatico (e quindi delle informazioni che i dispositivi digitali codificano), il colore di un pixel è quindi descritto come una \textbf{tripla di numeri} $(R, G, B)$, indicante quanta luce viene emessa dai subpixel rosso, verde e blu. \\
+Nel modello più comune:
+\begin{itemize}
+  \item ogni componente (R, G, B) può assumere valori da 0 a 255;
+  \item sono necessari 8 bit per ciascun colore, perchè con 8 bit sono possibili $2^8 = 256$ \textit{combinazioni};
+  \item un pixel completo viene rappresentato con 24 bit, come visto in precedenza nella sezione relativa alla profondità di colore.
+\end{itemize}
+
+
+\subsubsection*{Codifica esadecimale dei colori}
+
+La tripla $(R, G, B)$ viene spesso scritta in \textbf{notazione esadecimale}: dove ogni canale $(R, G, B)$ viene rappresentato con 2 cifre esadecimali. La forma generale è quindi la seguente:
+\[
+\#RRGGBB
+\]
+Dove:
+\begin{itemize}
+  \item RR indica che le prime due cifre esadecimali rappresentano il rosso;
+  \item GG indica che le prime due cifre esadecimali rappresentano il verde;
+  \item BB indica che le prime due cifre esadecimali rappresentano il blu.
+\end{itemize}
+
+
+
+\subsubsection*{I selettori di colore}
+
+
+I selettori di colore presenti nei software di grafica e sul web mostrano lo stesso colore in tre forme equivalenti:
+\begin{itemize}
+  \item come colore visivo;
+  \item come tripla RGB;
+  \item come codice esadecimale (HEX).
+\end{itemize}
+Sotto alcuni esempi di colori rappresentati in queste tre forme equivalenti.
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/col-picker-red.png}
+\end{center}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/col-picker-blue.png}
+\end{center}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/col-picker-green.png}
+\end{center}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/col-picker-azure.png}
+\end{center}
+
+
+\newpage
+\thispagestyle{empty}
+\begin{center}
+\vspace*{\fill}
+{\LARGE \textbf{Domande ed esercizi}}
+\vspace*{\fill}
+\end{center}
+\setcounter{section}{0}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\setcounter{equation}{0}
+\newpage
+
+\section{Esercizi -- Binario}
+
+\begin{enumerate}
+  \item In questo esercizio ogni lettera dell'alfabeto viene rappresentata dal suo numero corrispondente (A=1, B=2, ..., Z=26, spazio vuoto=0).  
+Il numero viene poi convertito in \textbf{binario} utilizzando il minor numero di bit necessari. Ricostruire la frase segreta a partire dai codici binari forniti.
+
+\emph{Messaggio da decifrare}
+
+\begin{center}
+\begin{tabular}{c}
+01001101 \\
+01101111 \\
+01101111 \\
+01101110 \\
+00000000 \\
+01010010 \\
+01101001 \\
+01110110 \\
+01100101 \\
+01110010 \\
+\end{tabular}
+\end{center}
+\end{enumerate}
+
+\begin{enumerate}
+\setcounter{enumi}{1}
+
+\item In un sistema di numerazione posizionale in base 7, indicare il massimo valore rappresentabile con 3 cifre (sempre in base 7). Quanto vale lo stesso numero in base 10?
+
+\item Che numero decimale rappresenta il numero binario 11111111? N.B. non serve utilizzare il metodo di conversione visto in classe.
+
+\item Quanti valori distinti è possibile rappresentare con 5 bit?
+
+\item Nel sistema binario, qual è il valore del bit più significativo in un numero di 6 bit?
+
+\item Rappresentare il numero $25_{10}$ in binario utilizzando esattamente 8 bit.
+
+\item Rappresentare il numero $72_{10}$ in binario utilizzando esattamente 8 bit.
+
+\item Qual è il minor numero di bit necessari per rappresentare il numero 4676?
+
+\item Un numero scritto in base 5 è $34210_5$. Converti il numero in base 10 mostrando i pesi delle cifre.
+
+\item Confronta le seguenti quantità di memoria, indicando quale è più grande, motivando la risposta.
+\begin{enumerate}
+    \item 1 GB vs. 1 MB
+    \item 1 KB vs. 1 GB
+    \item 1 TB vs. 1 MB
+    \item 2 GB vs. 2048 MB
+    \item 1.5 GB vs. 1200 MB
+    \item 10000 byte vs. 9 KB
+
+\end{enumerate}
+\end{enumerate}
+
+\begin{enumerate}
+\setcounter{enumi}{10}
+\item Dati i seguenti numeri, convertirli in binario e riportarli su una griglia 6 x 9, colorando quando le caselle con bit = 1. 
+\begin{center}
+\begin{tabular}{c}
+198 \\
+297 \\
+260 \\
+258 \\
+297 \\
+198 \\
+\end{tabular}
+\end{center}
+
+Che cosa appare sul foglio?
+
+
+\begin{center}
+\includegraphics[width=0.2\textwidth]{images/imm_bianconero_con_bit.png}
+
+\emph{Esempio di colorazione di una griglia 6 x 6}
+\end{center}
+
+\end{enumerate}
+
+
+\newpage
+\section{Esercizi -- Esadecimale}
+
+
+\begin{enumerate}
+\item In codifica esadecimale, scrivere i numeri successivi ai seguenti:
+\begin{enumerate}
+    \item $F$
+    \item $1A$
+    \item $2F$
+    \item $3C$
+    \item $AF$ 
+\end{enumerate}
+
+\item Quanti bit sono necessari per rappresentare i valori possibili di una singola cifra esadecimale?
+
+\item Quante cifre esadecimali servono per rappresentare tutti i valori possibili di un byte (8 bit)?
+
+\item Quanti valori distinti si possono rappresentare con 1 cifra esadecimale? E con 2 cifre? E con 3 cifre?
+
+\item Qual è il minor numero di cifre esadecimali necessarie per rappresentare il numero decimale $10000_{10}$? 
+
+\item Considerando il numero esadecimale $24FFF97_{16}$:
+\begin{enumerate}
+    \item qual è il minor numero di bit necessari per rappresentarne il valore?
+    \item qual è il minor numero di cifre nel sistema decimale necessario per rappresentarne il valore?
+\end{enumerate}
+\end{enumerate}
+
+\subsection{Conversioni}
+ % riprende dal numero successivo
+\begin{enumerate}
+\setcounter{enumi}{6}
+
+\item Dato il numero esadecimale $1A3$, convertirlo in decimale mostrando i calcoli con i pesi delle cifre.
+
+\item Dato il numero esadecimale $CD3$, convertirlo in decimale passando per il binario.\\Quindi $esadecimale \rightarrow binario \rightarrow decimale$.
+
+\item Dato il numero decimale $255_{10}$, convertirlo in esadecimale passando per il binario.\\Quindi $decimale \rightarrow binario \rightarrow esadecimale$.
+
+
+\item Convertire i seguenti numeri esadecimali in decimale.
+\begin{enumerate}
+    \item $173_{16}$
+    \item $347_{16}$
+    \item $3FC8_{16}$
+\end{enumerate}
+
+\item Convertire i seguenti numeri decimali in esadecimale.
+\begin{enumerate}
+    \item $173_{10}$
+    \item $347_{10}$
+    \item $348_{10}$
+\end{enumerate}
+
+\item Convertire i seguenti numeri esadecimali in binario.
+\begin{enumerate}
+    \item $CF79E_{16}$
+    \item $A3F2_{16}$
+    \item $9D4B_{16}$
+\end{enumerate}
+
+
+\item Convertire i seguenti numeri binari in esadecimale.
+\begin{enumerate}
+    \item $11111100010101000_2$
+    \item $11001010011100001101_2$
+    \item $1010111100101101_2$
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Esercizi -- Codifica dei caratteri}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+  \item Scrivere il codice ASCII decimale e binario (8 bit) dei seguenti caratteri:
+  \begin{itemize}
+    \item \code{'A'}
+    \item \code{'a'}
+    \item \code{'0'}
+    \item spazio
+  \end{itemize}
+
+  \item Indicare quali delle seguenti affermazioni sono vere e quali false:
+  \begin{enumerate}
+    \item ASCII utilizza 8 bit per ogni carattere.
+    \item Il carattere \code{'a'} ha un codice ASCII maggiore di \code{'A'}.
+    \item UTF-8 è compatibile con ASCII.
+    \item Le emoji possono essere rappresentate in ASCII.
+  \end{enumerate}
+
+  \item Quanti caratteri diversi è possibile rappresentare utilizzando:
+  \begin{enumerate}
+    \item 7 bit;
+    \item 8 bit;
+    \item 16 bit.
+  \end{enumerate}
+
+  \item Convertire la parola \code{"ciao"} nei corrispondenti codici ASCII decimali e binari.
+
+  \item La seguente sequenza di byte rappresenta una parola in ASCII. Ricostruire il testo:
+  \[
+  01001000\quad 01101001\quad 00100001
+  \]
+
+  \item Quanti byte occupa in UTF-8 la parola \code{"computer"}? Motivare la risposta.
+
+  \item Quanti byte occupa in UTF-8 la parola \code{"città"}? Confrontare il risultato con l’esercizio precedente.
+
+  \item Il carattere \code{'è'} ha code point Unicode \code{U+00E8}.
+  \begin{enumerate}
+    \item Scrivere il valore decimale del code point.
+    \item Indicare quanti byte vengono utilizzati in UTF-8.
+    \item Scrivere la rappresentazione binaria UTF-8 completa.
+  \end{enumerate}
+
+  \item Il simbolo \code{'€'} viene codificato in UTF-8 utilizzando 3 byte. Il suo code point Unicode è \texttt{U+20AC}.
+  \begin{enumerate}
+    \item Spiegare perché non può essere rappresentato con un solo byte.
+    \item Indicare il pattern UTF-8 utilizzato.
+  \end{enumerate}
+
+  \item Osservare la seguente sequenza di byte:
+  \[
+  11000011\ 10101000
+  \]
+  \begin{enumerate}
+    \item Indicare se si tratta dell’inizio di un carattere o di un byte di continuazione.
+    \item Indicare quanti byte occupa complessivamente il carattere.
+    \item Indicare quale carattere viene rappresentato.
+  \end{enumerate}
+
+  \item Un file di testo contiene 10\,000 caratteri ASCII e 500 caratteri accentati.
+  \begin{enumerate}
+    \item Calcolare quanti byte occupa il file in UTF-8.
+    \item Calcolare quanti byte avrebbe occupato se ogni carattere fosse stato rappresentato utilizzando 2 byte fissi.
+  \end{enumerate}
+
+  \item Spiegare perché UTF-8 è una codifica a lunghezza variabile ma non richiede separatori tra i caratteri.
+
+  \item Un programma legge un file UTF-8 byte per byte. Spiegare come riesce a capire dove inizia e dove termina ciascun carattere.
+
+  % Nuovi esercizi
+  \item Scrivere il codice ASCII decimale e binario (8 bit) dei seguenti caratteri:
+  \begin{itemize}
+    \item \code{'B'}
+    \item \code{'z'}
+    \item \code{'9'}
+    \item punto (\code{'.'})
+  \end{itemize}
+
+  \item Convertire la parola \code{"sole"} nei corrispondenti codici ASCII decimali e binari.
+
+\end{enumerate}
+
+\newpage
+
+
+\section{Esercizi -- Codifica delle immagini}
+
+\begin{enumerate}
+  \item Un’immagine in bianco e nero ha risoluzione $10 \times 10$ pixel.
+  \begin{enumerate}
+    \item Quanti pixel contiene?
+    \item Quanti bit sono necessari per rappresentarla?
+  \end{enumerate}
+
+  \item Un’immagine in scala di grigi utilizza 8 bit per pixel.
+  \begin{enumerate}
+    \item Quanti livelli di grigio possono essere rappresentati?
+    \item Quanti byte occupa un’immagine di risoluzione $100 \times 100$ pixel?
+  \end{enumerate}
+
+  \item Un pixel RGB è rappresentato dalla tripla $(255, 0, 0)$.
+  \begin{enumerate}
+    \item Indicare il colore rappresentato.
+    \item Scrivere il codice esadecimale corrispondente.
+  \end{enumerate}
+
+  %\item Convertire i seguenti colori dal modello %RGB alla rappresentazione esadecimale:
+  %\begin{enumerate}
+  %  \item $(0, 0, 0)$
+  %  \item $(255, 255, 255)$
+  %  \item $(0, 255, 0)$
+  %  \item $(128, 128, 128)$
+  %\end{enumerate}
+
+  \item Un’immagine RGB Full HD ($1920 \times 1080$) utilizza 24 bit per pixel.
+  \begin{enumerate}
+    \item Calcolare il numero totale di pixel.
+    \item Calcolare il numero totale di bit necessari.
+    \item Calcolare lo spazio occupato in MB, assumendo assenza di compressione.
+  \end{enumerate} 
+
+  %\item Disegnare una griglia $8 \times 8$ che %rappresenti una lettera a scelta utilizzando 1 %bit per pixel, dove 0 indica un pixel spento e %1 indica un pixel acceso. Scrivere la sequenza %di bit risultante.
+
+  %\item Un’immagine utilizza 4 bit per pixel.
+  %\begin{enumerate}
+  %  \item Quanti colori distinti può rappresentare?
+  %  \item Spiegare se tale profondità di colore è sufficiente per rappresentare una fotografia %realistica.
+  %\end{enumerate}
+
+  \item Un’immagine viene salvata come sequenza di bit senza specificare risoluzione e profondità di colore.
+  \begin{enumerate}
+    \item Spiegare perché non è possibile ricostruire correttamente l’immagine.
+    \item Indicare quali informazioni minime sarebbero necessarie.
+  \end{enumerate}
+
+  \item Due immagini occupano lo stesso spazio in byte, ma una è in bianco e nero e l’altra è a colori.
+  \begin{enumerate}
+    \item Spiegare come ciò sia possibile.
+    \item Indicare almeno due parametri che possono essere diversi.
+  \end{enumerate}
+
+  \item Un’immagine RGB utilizza esclusivamente i valori 0 e 255 per ciascun canale.
+  \begin{enumerate}
+    \item Quanti colori distinti è possibile rappresentare?
+    \item Descrivere l’aspetto visivo atteso dell’immagine.
+  \end{enumerate}
+
+  \item Una piccola icona ha dimensione {100 $\times$ 100} pixel.  
+    \begin{enumerate}
+        \item Quanti pixel totali contiene?
+        \item Se è in bianco e nero (1 bit per pixel), quanti byte servono per memorizzarla?
+        \item Se è a 24 bit per pixel, quanti byte servono?
+    \end{enumerate}
+
+  \item Considerando un'immagine Full HD, con risoluzione {1920 $\times$ 1080} pixel
+    \begin{enumerate}
+        \item Quanti pixel totali contiene l'immagine?
+        \item Se l'immagine è in bianco e nero (1 bit per pixel), quanti byte sono necessari per memorizzarla?
+        \item Se l'immagine è a colori con profondità di colore di 24 bit per pixel (modello RGB, 8 bit per ogni canale di colore), quanti byte sono necessari per rappresentare l'immagine? A quanti megabyte circa corrisponde questa dimensione?
+    \end{enumerate}
+
+  % Nuovi esercizi
+  \item Un’immagine in bianco e nero ha risoluzione $12 \times 8$ pixel.
+    \begin{enumerate}
+        \item Quanti pixel contiene?
+        \item Quanti bit sono necessari per rappresentarla?
+    \end{enumerate}
+
+  \item Un’immagine utilizza 16 bit per pixel e ha risoluzione $50 \times 40$ pixel.
+    \begin{enumerate}
+        \item Quanti colori distinti può rappresentare?
+        \item Quanti byte occupa l’immagine?
+    \end{enumerate}
+
+\end{enumerate}
+
+
+
+\end{document}
