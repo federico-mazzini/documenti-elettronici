@@ -1,0 +1,62 @@
+\documentclass[14pt]{extreport}
+
+% Lingua e codifica
+\usepackage[italian]{babel}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm]{geometry}
+\usepackage{graphicx} 
+\usepackage[hidelinks]{hyperref}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{fancyhdr} % intestazioni e piè di pagina
+
+% Capitoli con numero inline e iniziano sempre in pagina nuova
+\titleformat{\chapter}[hang]
+  {\normalfont\huge\bfseries}
+  {\thechapter.}
+  {1em} 
+  {}
+\titlespacing*{\chapter}{0pt}{0pt}{20pt} % spazio prima/dopo titolo
+
+% Interlinea
+\onehalfspacing
+
+% Stile intestazione/piede di pagina
+\pagestyle{fancy}
+\fancyhf{} 
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+% --- Pagina iniziale ---
+\begin{titlepage}
+    \centering
+
+    % Nome della scuola in grande
+    {\LARGE \textbf{IIS ALBERGHETTI} \par}
+    {\LARGE \textbf{Liceo Scientifico Scienze Applicate} \par}
+    \vspace{2cm}
+
+    % Logo scuola
+    \includegraphics[width=0.3\textwidth]{immagini/alberghetti-logo.png}
+    \vspace{1.5cm}
+
+    % Titolo relazione
+    {\LARGE \textbf{Template di documento LaTeX} \par}
+    {\Large Informatica \par}
+    {\large \today \par}
+    
+    % Nome studente a fondo pagina
+    \vfill
+    {\Large Federico Mazzini (da modificare)\par}
+    {\large 2CLS \par}
+
+\end{titlepage}
+
+\newpage
+
+% Indice
+\vspace*{5cm}
+\tableofcontents
+\newpage
+
+\end{document}

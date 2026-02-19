@@ -1,0 +1,227 @@
+\documentclass[14pt]{extreport}
+
+% Lingua e codifica
+\usepackage[italian]{babel}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm]{geometry}
+\usepackage{graphicx} 
+\usepackage[hidelinks]{hyperref}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{fancyhdr} % intestazioni e piè di pagina
+
+% Capitoli con numero inline e iniziano sempre in pagina nuova
+\titleformat{\chapter}[hang]
+  {\normalfont\huge\bfseries}
+  {\thechapter.}
+  {1em}
+  {} 
+\titlespacing*{\chapter}{0pt}{0pt}{20pt} % spazio prima/dopo titolo
+
+% Interlinea
+\onehalfspacing
+
+% Stile intestazione/piede di pagina
+\pagestyle{fancy} 
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+% --- Pagina iniziale ---
+\begin{titlepage}
+    \centering
+  
+    % Nome della scuola in grande
+    {\LARGE \textbf{IIS ALBERGHETTI} \par}
+    {\LARGE \textbf{Liceo Scientifico Scienze Applicate} \par}
+    \vspace{2cm}
+
+    % Logo scuola
+    \vspace{3cm}
+
+    % Titolo relazione
+    {\LARGE \textbf{Template di documento LaTeX e principali comandi} \par}
+    {\Large Informatica \par}
+    {\large \today \par}
+    
+    % Nome studente a fondo pagina
+    \vfill
+    {\Large Nome studente\par}
+    {\large 2CLS - 2ELS \par}
+
+\end{titlepage}
+
+\newpage
+
+% Indice
+\vspace*{5cm}
+\tableofcontents
+\newpage
+
+% --- Capitoli ---
+\chapter{Introduzione a capitoli e sezioni}
+Testo introduttivo della relazione.
+
+\section{Prima sezione del capitolo 1}
+Una section è una sottoparte del capitolo (chapter).
+
+
+\subsection{Sottosezione}
+Questa è una sottosezione, sottoparte della sezione, quindi un paragrafo più annidato.
+
+\subsubsection{Sezione ancora più annidata}
+In questa sezione non c'è numerazione. Viene utilizzata se abbiamo necessità di una sottosezione aggiuntiva
+
+\paragraph{Paragrafo} 
+Questo è un paragraph
+
+\section{Seconda sezione del capitolo 1}
+Breve biografia dei principali pionieri dell'informatica.
+
+\chapter{Esempi pratici}
+
+\section{Elenchi numerati e puntati}
+Elenchi numerati:
+
+\begin{enumerate}
+\item Primo elemento
+\item Secondo elemento
+\end{enumerate}
+Elenchi puntati:
+
+\begin{itemize}
+\item Punto 1
+\item Punto 2
+\end{itemize}
+
+\subsection{Elenchi annidati}
+\begin{itemize}
+    \item Primo livello
+    \item Ancora primo livello
+    \begin{itemize}
+        \item Secondo livello
+        \item Ancora secondo livello
+        \begin{itemize}
+            \item Terzo livello
+        \end{itemize}
+    \end{itemize}
+    \item Di nuovo primo livello
+\end{itemize}
+
+\newpage
+\section{Inserire figure}
+Per inserire immagini nel documento, caricare il file e usare il comando \verb|\includegraphics|.
+
+\begin{figure}[h!] 
+\includegraphics[width=0.25\linewidth]{immagini/immagine.jpg}
+\caption{Esempio di figura}
+\end{figure}
+
+
+\begin{figure}[h!] 
+\centering 
+\includegraphics[width=0.25\linewidth]{immagini/immagine.jpg}
+\caption{Esempio di figura centrata e con width 0.25}
+\end{figure}
+
+
+
+\begin{figure}[h!] 
+\centering
+\includegraphics[width=0.5\linewidth]{immagine.jpg}
+\caption{Esempio di figura con width 0.5}
+\end{figure}
+
+\begin{itemize}
+  \item La keyword \verb|centering| centra l'immagine nel documento.
+  \item La keyword \verb|width| definisce quanto grande è l'immagine.
+\end{itemize}
+
+
+Con il comando \verb|\newpage| è possibile definire e cominciare una nuova pagina del documento.
+\newpage
+% --- TABELLE ---
+\section{Creare tabelle}
+
+Le tabelle si creano con il comando \verb|tabular|.
+
+Sintassi:
+\begin{verbatim}
+\begin{tabular}{formato}
+contenuto
+\end{tabular}
+\end{verbatim}
+Formato colonne:
+\begin{itemize}
+  \item \verb|l| sinistra \quad
+  \item \verb|c| centro \quad
+  \item \verb|r| destra \quad
+  \item \verb||| linea verticale
+\end{itemize}
+Dentro la tabella:
+\begin{itemize}
+  \item \verb|&| separa colonne \quad
+  \item \verb|\\| fine riga \quad
+  \item \verb|\hline| linea orizzontale
+\end{itemize}
+Esempio:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|r}
+Oggetto & Quantità \\\hline
+Widget & 42 \\
+Gadget & 13
+\end{tabular}
+\caption{Esempio di tabella}
+\end{table}
+
+\verb|table| serve per centrare e aggiungere la didascalia; la struttura è in \verb|tabular|.
+
+
+\newpage
+\section{Formule matematiche}
+
+\LaTeX{} permette di scrivere formule in modo chiaro e professionale.
+
+\textbf{Inline}: si usa \verb|$ ... $|  
+Esempio: $a^2 + b^2 = c^2$
+
+\textbf{Display}: si usa \verb|\[ ... \]|  
+
+\[
+a^2 + b^2 = c^2
+\]
+
+\subsection*{Comandi principali}
+
+\begin{itemize}
+\item Apice: \verb|^| \quad $x^2 \quad x^{10}$
+\item Pedice: \verb|_| \quad $a_1 \quad a_{ij}$
+\item Frazione: \verb|\frac{a}{b}| \quad $\frac{a}{b}$
+\item Radice: \verb|\sqrt{x}| \quad $\sqrt{x}$
+\item Sommatoria: \verb|\sum_{i=1}^{n}| \quad $\sum_{i=1}^{n}$
+\item Integrale: \verb|\int_0^1| \quad $\int_0^1 x^2 dx$
+\end{itemize}
+
+\subsection*{Lettere greche}
+
+Si scrivono con \verb|\| + nome:
+
+\[
+\alpha \quad \beta \quad \gamma \quad \lambda \quad \pi
+\] 
+
+\subsection*{Equazioni allineate}
+
+Con il pacchetto \verb|amsmath| si usa l’ambiente \verb|align|:
+
+\begin{verbatim}
+\begin{align}
+a &= b + c \\
+  &= d + e
+\end{align}
+\end{verbatim}
+
+
+\end{document}
