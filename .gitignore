@@ -17,7 +17,8 @@ out/
 *.vrb
 *.bbl
 *.blg
-*.pdf
+principali-comandi.pdf
+template-vuoto.pdf
 
 # roba di macOS
 .DS_Store

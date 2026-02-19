@@ -1,0 +1,129 @@
+ok ora cominceremo una nuova unità didattica
+quest'unità riguarderà i documenti elettronici
+noi però non lo faremo come solitamnete si fa ovvero "come si produce un documento elettronico" e quindi tutte quelle regole connesse
+a come fare un titolo, andare a capo impaginazione. Queste non sono competenze informatiche ma tecnologiche, che demandiamo a tutorial youtube o a ricerche puntuali 
+sul web
+
+						quello che faremo noi, il nostro obbiettivo, sarà capire come funzionano i software per la produzione di documenti e le principali tipologie
+(WYSIWYG vs linguaggi di markup come latex e markdown)
+noi non impariamo come usare le singole e specifiche funzioni dei software, perchè i software cambiano, i computer che usiamo cambiano,
+la tecnologia avanza
+quello che dobbiamo imparare è un modello di funzionamento e un metodo per cercare quello di cui abbiamo bisogno. 
+
+							     dobbiamo capire che i computer e i software non sono apparecchi magici, sono strumenti che noi umani abbiamo inventato e pensato per altri umani 
+i computer sono stupidi, fanno solo quello che gli diciamo, quindi dobbiamo essere bravi a dare istruzioni
+
+è normale che non sappiamo fare qualcosa, perchè dobbiamo prima capire come dirlo al computer, che non parla la nostra lingua, non possiamo parlarci, dobbiamo trovare i comandi giusti, questi comandi, li possiamo chiedere a qualcuno di esperto, possiamo leggere libri, articoli online o vedere video tutorial
+dobbiamo anche lavorare su "come cercare" la soluzione e quello che vogliamo fare
+
+es. non dobbiamo imparare come si crea una tabella su word, dobbiamo imparare come cercare la soluzione, documentarci e seguire quello che abbiamo letto
+--------------------------------------------------------------------------------------------------------------------------------
+
+Scaletta
+- documento elettronico
+- editor di testo e software per produrre testi
+    - file txt ed editor minimale
+    - software WYSIWYG
+    - linguaggi di markup (LATeX)
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+Che cos'è un documento elettronico
+è un insieme di dati organizzati, di diverse tipologie. possiamo infatti distinguere tutorial
+- il testo vero e proprio
+- la formattazione e lo stile
+- metadati del documento
+fare degli esempi di tutti e tre con screen di un documento 
+Titolo: Capire cosa c’è dentro un documento
+Contenuto: il testo vero e proprio che leggiamo.
+Stile: tutte le proprietà che definiscono come il testo appare:
+Font, dimensione, colore, grassetto, corsivo
+Allineamento (sinistra, centro, destra), interlinea, rientri
+Viene memorizzato all’interno del file come dati strutturati (XML)
+Metadati: informazioni sul documento, non sul testo:
+Autore, data creazione, data ultima modifica, tag, commenti
+Servono per identificare, catalogare e gestire il file
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+1 Editor di testo minimali
+sono editor già presenti nei nostri computer quando li compriamo e permettono di scrivere testi, tipicamente senza formattazione
+il cosiddetto "blocco note"
+magari dire due robe, quando si usa... codifica...ecc
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+
+2 Editor di testo classici (WYSIWYG)
+Questa categoria di software è quella classica che solitamente si intende con editor di testo o software per la scrittura di documenti elettronici.
+L'acronimo sta per What you see is what you get, ovvero, la formattazione e lo stile del testo (cioè una disposizione grafica equivalente a quella visualizzata sullo schermo del pc) è decisa dall'utente che sta usando il software ed è il risultato finale della scrittura del documento
+
+Esempi di questi software sono word, libre office, open office, google docs
+
+Questi editor di testo gestiscono tutto loro, il contenuto del testo, lo stile e i metadati.
+Il contenuto del testo è quello che noi scriviamo, mentre lo stile glielo diamo noi con i comandi forniti dal software, che tipicamente sono delle icone sullo schermo
+
+Questi software sono di facile utilizzo perchè sono intuitivi, sono composti da un'interfaccia grafica che ci permette di comunicare con loro e che attraverso 
+icone "parlanti" (cioè che spiegano la loro funzione tramite parole o disegni) permettono di modificare lo stile di un documento, centrare un testo, aggiungere
+un'immagine. 
+
+ma come vengono salvati nel computer questi testi? dove sta la "formattazione"? sembra invisibile...
+in realtà questi software salvano i nostri documenti in formato "leggibile" dal software. questo significa che questi file non sono pensati per essere letti da un umano, ma da una macchina (quella che sta eseguendo il nostro software di produzione testi)
+e al loro interno c'è scritta tutta la struttura del documento, sia il testo, che la formattazione che i metadati
+ogni software ha il suo tipo di file
+es. word ha docx, open office, libre office ha odt
+
+facciamo un esempio, apriamo un file .odt
+lo rinominiamo in .zip e lo estraiamo
+
+abbiamo creato un documento con due frasi intervallate da una riga vuota, ecco cosa abbiamo nel nostro file content.xml
+
+Document
+ ├── Styles
+ │     ├── P1
+ │     │     font-size = 20pt
+ │     │     align = center
+ │     │     font = "Comic Sans"
+ │     │
+ │     └── P2
+ │           font-size = 20pt
+ │           align = center
+ │           font = "Lobster Two"
+ │
+ └── Paragraphs
+       ├── Paragraph(style = P1)
+       │       text = "Ciao a tutti..."
+       │
+       ├── Paragraph(style = P1)
+       │       text = ""
+       │
+       └── Paragraph(style = P2)
+               text = "Questa è un altra riga..."
+
+il software ricostruisce questa specie di albero che chiamiamo "struttura dati" e grazie a questa permette di visualizzare il testo correttamente
+
+
+lettura di content.xml -> disegno a schermo del documento da parte di un componente chiamato "motore di rendering"
+(da scrivere ancora più semplice, perchè loro non hanno mai visto niente di programmazione)
+for each Paragraph:
+    prendo il suo Style
+    risolvo ereditarietà
+    applico proprietà
+    disegno testo
+
+
+Obbiettivo finale e frase ultima:
+Word e LibreOffice non “salvano testi”.
+Salvano strutture dati che poi vengono visualizzate.
+
+
+da scrivere ancora più semplice
+XML FILE
+   ↓ parsing
+ALBERO XML
+   ↓ trasformazione
+MODELLO OGGETTI
+   ↓ rendering
+SCHERMO
