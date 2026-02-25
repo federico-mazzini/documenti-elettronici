@@ -19,6 +19,7 @@ out/
 *.blg
 principali-comandi.pdf
 template-vuoto.pdf
+dispense-latex.pdf
 
 # roba di macOS
 .DS_Store

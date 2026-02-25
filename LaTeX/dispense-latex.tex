@@ -1,0 +1,528 @@
+\documentclass[a4paper,12pt]{article}
+
+% Lingua e codifica
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+
+% Impaginazione
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+
+% Comandi utili
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\comando}[1]{\texttt{\textbackslash #1}}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+
+{\Large I.I.S. \textit{``Francesco Alberghetti''} Imola}\\[0.3cm]
+{\normalsize Liceo Scientifico Scienze Applicate}\\[2.2cm]
+
+\rule{0.85\textwidth}{0.8pt}\\[0.9cm]
+
+{\huge\bfseries Introduzione a \LaTeX}\\[0.4cm]
+{\Large Scrivere documenti con un linguaggio di markup}\\[0.6cm]
+
+\rule{0.85\textwidth}{0.8pt}\\[2.5cm]
+
+{\Large Materiale didattico di Informatica}\\[0.3cm]
+
+\vfill
+
+{\large Prof. Federico Mazzini}\\[0.3cm]
+{\large Anno scolastico 2025 -- 2026}
+
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Obiettivo}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Comprendere che \LaTeX{} non è solo uno strumento di scrittura,  
+ma un primo contatto con il concetto di linguaggio formale,  
+sintassi e compilazione.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Che cos'è \LaTeX}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\LaTeX{} è un sistema per la produzione di documenti basato su un linguaggio testuale.  
+Non si scrive ``trascinando'' elementi con il mouse, ma scrivendo \textbf{comandi}.
+
+Un documento \LaTeX{} è un semplice file di testo:
+\begin{itemize}
+    \item contiene parole;
+    \item contiene comandi;
+    \item viene compilato per produrre un PDF.
+\end{itemize}
+
+Questo approccio è molto diverso da un editor WYSIWYG (come Word), ma è estremamente potente.
+
+\subsection{Perché usare \LaTeX}
+
+\begin{itemize}
+    \item separa contenuto e forma;
+    \item rende il documento coerente e strutturato;
+    \item introduce alla logica dei linguaggi formali;
+    \item abitua a scrivere seguendo regole sintattiche precise.
+\end{itemize}
+
+Scrivere in \LaTeX{} significa imparare a dialogare con un sistema che interpreta istruzioni.
+
+\section{Un linguaggio, non un programma grafico}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\LaTeX{} è un linguaggio di markup. Al contrario degli editor basati sul paradigma \textbf{WYSIWYG} (``What You See Is What You Get''), come ad esempio Microsoft Word, Google Docs, o LibreOffice Writer, con \LaTeX{} non si modifica direttamente l'aspetto grafico del testo. \\
+Negli editor WYSIWYG:
+\begin{itemize}
+    \item si sceglie un font;
+    \item si imposta una dimensione (es. 54 pt);
+    \item si applica il grassetto;
+    \item si interviene sulla forma visiva del testo.
+\end{itemize}
+In \LaTeX{}, invece:
+\begin{itemize}
+    \item si specifica che un testo è un \textbf{titolo};
+    \item si indica che un blocco è una \textbf{sezione};
+    \item si descrive la \textbf{struttura logica} del documento.
+\end{itemize}
+In Latex non si dice \emph{come deve apparire} il testo,  
+ma \emph{che cosa rappresenta} quel testo.
+
+Il file latex è quindi un puro file testuale, con estensione .tex, che contiene sia il contenuto che le istruzioni necessarie per ottenere l'output finale. Esiste poi un programma, chiamato compilatore che prende il testo Latex e decide come deve apparire graficamente, creando poi un PDF.
+
+Questo modello è simile alla programmazione:
+\begin{itemize}
+    \item esiste una sintassi da rispettare;
+    \item esistono regole formali;
+    \item esiste un interprete (compilatore) che produce un risultato.
+\end{itemize}
+
+Scrivere in \LaTeX{} significa quindi descrivere il significato del testo,  
+non la sua estetica immediata.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Struttura di un documento}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Ogni documento \LaTeX{} ha una struttura precisa.
+
+\subsection{Struttura minima}
+
+\begin{verbatim}
+\documentclass{article}
+
+\begin{document}
+
+Ciao mondo!
+
+\end{document}
+\end{verbatim}
+Elementi fondamentali:
+\begin{itemize}
+    \item \comando{documentclass} definisce il tipo di documento;
+    \item \comando{begin\{document\}} inizia il contenuto;
+    \item \comando{end\{document\}} lo termina.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Comandi e sintassi}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Un comando \LaTeX{}:
+\begin{itemize}
+    \item inizia con il simbolo \code{\textbackslash};
+    \item può avere argomenti tra parentesi graffe \code{\{\}};
+    \item può avere opzioni tra parentesi quadre \code{[]}.
+\end{itemize}
+
+Esempi:
+
+\begin{verbatim}
+\textbf{Testo in grassetto}
+\section{Titolo}
+\documentclass[12pt]{article}
+\end{verbatim}
+\textbf{La sintassi deve essere rispettata con precisione.  
+Un errore di parentesi produce errore di compilazione.}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Strutturare il testo}
+
+La struttura di un documento in \LaTeX{} è gerarchica.
+Le sezioni non servono a modificare la dimensione del testo, 
+ma a definire il ruolo logico delle parti del documento.
+
+In alcune classi di documento, come \verb|book| o \verb|report|, 
+è disponibile anche il comando \verb|\chapter|, che rappresenta 
+un livello gerarchico superiore rispetto a \verb|\section|.
+
+\bigskip
+\paragraph{Comandi}
+
+\begin{verbatim}
+\chapter{Capitolo}
+\section{Titolo}
+\subsection{Sottotitolo}
+\subsubsection{Paragrafo}
+\end{verbatim}
+
+\bigskip
+
+\paragraph{Risultati}
+\section*{Titolo}
+\subsection*{Sottotitolo}
+\subsubsection*{Paragrafo}
+
+\bigskip
+
+La gerarchia è quindi:
+
+\begin{itemize}
+    \item \verb|\chapter| livello più alto (se disponibile);
+    \item \verb|\section| livello principale;
+    \item \verb|\subsection| livello annidato;
+    \item \verb|\subsubsection| livello ancora più specifico.
+\end{itemize}
+
+I comandi senza asterisco producono numerazione automatica e sono presenti all'interno dell'indice.
+La versione con asterisco (es. \verb|\section*|) rimuove la numerazione.
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Formattazione del testo}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In \LaTeX{} la formattazione non si applica con il mouse:
+qualsiasi modifica del testo deve essere esplicitata tramite un comando.
+
+Si vuole colorare una porzione di testo? Esiste un comando. Si vuole porre in grassetto? Esiste un comando. Si vuole sottolineare o enfatizzare? Anche questo si può fare.
+
+\bigskip
+
+\paragraph{Comandi principali}
+
+\begin{verbatim}
+\textbf{testo}        % grassetto
+\textit{testo}        % corsivo
+\texttt{testo}        % monospazio
+\underline{testo}     % sottolineato
+\emph{testo}          % enfatizzato (di solito corsivo)
+\textsc{testo}        % maiuscoletto
+\textsf{testo}        % font sans-serif
+\textrm{testo}        % font roman
+\textnormal{testo}    % font normale
+\textcolor{red}{testo} % testo colorato (richiede xcolor)
+\end{verbatim}
+
+\bigskip
+
+\paragraph{Risultato}\mbox{}\\
+
+Questo è \textbf{grassetto}.  
+
+Questo è \textit{corsivo}.  
+
+Questo è \texttt{monospazio}.  
+
+Questo è \underline{sottolineato}.  
+
+Questo è \emph{enfatizzato}.  
+
+Questo è \textsc{maiuscoletto}.  
+
+Questo è \textsf{sans-serif}.  
+
+Questo è \textcolor{red}{rosso}.  
+
+
+\bigskip
+
+\paragraph{Si possono anche combinari comandi}
+
+\begin{verbatim}
+\textbf{\textit{grassetto e corsivo}}
+\textcolor{blue}{\underline{blu e sottolineato}}
+\end{verbatim}
+\textbf{\textit{grassetto e corsivo}}\\
+\textcolor{blue}{\underline{blu e sottolineato}}
+
+
+\newpage
+\subsection{Elenchi numerati e puntati}
+Elenchi numerati:
+
+\begin{enumerate}
+\item Primo elemento
+\item Secondo elemento
+\end{enumerate}
+Elenchi puntati:
+
+\begin{itemize}
+\item Punto 1
+\item Punto 2
+\end{itemize}
+
+\subsubsection{Elenchi annidati}
+\begin{itemize}
+    \item Primo livello
+    \item Ancora primo livello
+    \begin{itemize}
+        \item Secondo livello
+        \item Ancora secondo livello
+        \begin{itemize}
+            \item Terzo livello
+        \end{itemize}
+    \end{itemize}
+    \item Di nuovo primo livello
+\end{itemize}
+
+\newpage
+\section{Inserire figure}
+Per inserire immagini nel documento, caricare il file e usare il comando \verb|\includegraphics|.
+
+\begin{figure}[h!] 
+\includegraphics[width=0.25\linewidth]{immagini/immagine.jpg}
+\caption{Esempio di figura}
+\end{figure}
+
+
+\begin{figure}[h!] 
+\centering 
+\includegraphics[width=0.25\linewidth]{immagini/immagine.jpg}
+\caption{Esempio di figura centrata e con width 0.25}
+\end{figure}
+
+
+
+\begin{figure}[h!] 
+\centering
+\includegraphics[width=0.5\linewidth]{immagini/immagine.jpg}
+\caption{Esempio di figura con width 0.5}
+\end{figure}
+
+\begin{itemize}
+  \item La keyword \verb|centering| centra l'immagine nel documento.
+  \item La keyword \verb|width| definisce quanto grande è l'immagine.
+\end{itemize}
+
+
+Con il comando \verb|\newpage| è possibile definire e cominciare una nuova pagina del documento.
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Creare tabelle}
+
+In \LaTeX{}, le tabelle si creano principalmente con l'ambiente \verb|tabular|. 
+L'ambiente \verb|table| serve per aggiungere didascalie, centrare la tabella e riferimenti automatici.
+
+\subsection*{Teoria base}
+
+\begin{itemize}
+  \item Le colonne hanno un formato: \verb|l| (sinistra), \verb|c| (centro), \verb|r| (destra)
+  \item Le linee verticali si ottengono con \verb+|+
+  \item Il separatore di colonne è \verb|&|
+  \item La fine di una riga si indica con \verb|\\|
+  \item Linee orizzontali: \verb|\hline|
+\end{itemize}
+
+---
+
+\subsection*{Sintassi generale}
+
+\begin{verbatim}
+\begin{tabular}{formato_colonne}
+cella1 & cella2 & cella3 \\
+cella4 & cella5 & cella6 \\
+\end{tabular}
+\end{verbatim}
+
+Esempio minimo:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|r}
+Oggetto & Quantità \\\hline
+Widget & 42 \\
+Gadget & 13
+\end{tabular}
+\caption{Esempio di tabella}
+\end{table}
+
+---
+
+\subsection*{Comandi principali e risultato}
+
+\begin{itemize}
+  \item \verb|l, c, r| \quad allineamento colonne: sinistra, centro, destra
+  \item \verb+|+ \quad linea verticale tra colonne
+  \item \verb|&| \quad separa le colonne
+  \item \verb|\\| \quad fine riga
+  \item \verb|\hline| \quad linea orizzontale
+\end{itemize}
+
+---
+
+\subsection*{Esempi pratici}
+
+\paragraph{Tabella semplice senza linee verticali}
+
+\begin{verbatim}
+\begin{tabular}{l r}
+Nome & Età \\
+Alice & 20 \\
+Bob & 22
+\end{tabular}
+\end{verbatim}
+
+\paragraph{Risultato}
+
+\begin{tabular}{l r}
+Nome & Età \\
+Alice & 20 \\
+Bob & 22
+\end{tabular}
+\bigskip
+
+
+\paragraph{Tabella con linee verticali e orizzontali:}
+
+\begin{verbatim}
+\begin{tabular}{|l|c|r|}
+\hline
+Prodotto & Quantità & Prezzo \\
+\hline
+Widget & 42 & 1.50 \\
+Gadget & 13 & 2.30 \\
+\hline
+\end{tabular}
+\end{verbatim}
+
+\paragraph{Risultato}
+
+\begin{tabular}{|l|c|r|}
+\hline
+Prodotto & Quantità & Prezzo \\
+\hline
+Widget & 42 & 1.50 \\
+Gadget & 13 & 2.30 \\
+\hline
+\end{tabular}
+\bigskip
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Formule matematiche}
+
+\LaTeX{} permette di scrivere formule matematiche in modo chiaro e professionale. 
+Esistono due modalità principali: 
+
+\begin{itemize}
+  \item \textbf{Inline}: la formula è inserita nella stessa riga del testo. Si racchiude tra \$...\$.  
+  Esempio: $a^2 + b^2 = c^2$
+  
+  \item \textbf{Display}: la formula occupa una riga propria e viene centrata. Si usa \verb|\[ ... \]| o \verb|equation|.  
+  Esempio:
+  \[
+  a^2 + b^2 = c^2
+  \]
+\end{itemize}
+
+\subsection*{Teoria base dei comandi matematici}
+
+Ogni formula è costruita usando simboli speciali. Alcuni concetti chiave:
+
+\begin{itemize}
+  \item \textbf{Apice}: indica potenze, si scrive con \verb|^|
+  \item \textbf{Pedice}: indica indici o sottomultipli, si scrive con \verb|_|
+  \item \textbf{Frazione}: divide numeratore e denominatore, \verb|\frac{}{}|
+  \item \textbf{Radice}: si usa \verb|\sqrt{}|
+  \item \textbf{Sommatoria}: \verb|\sum| con pedici e apici
+  \item \textbf{Integrale}: \verb|\int| con pedici e apici
+\end{itemize}
+
+---
+
+\subsection*{Comandi principali e risultato}
+
+\begin{itemize}
+  \item Apice: \verb|x^2, x^{10}| \quad $\Rightarrow x^2, x^{10}$
+  \item Pedice: \verb|a_1, a_{ij}| \quad $\Rightarrow a_1, a_{ij}$
+  \item Frazione: \verb|\frac{a}{b}| \quad $\Rightarrow \frac{a}{b}$
+  \item Radice: \verb|\sqrt{x}| \quad $\Rightarrow \sqrt{x}$
+  \item Sommatoria: \verb|\sum_{i=1}^{n}| \quad $\Rightarrow \sum_{i=1}^{n} i$
+  \item Integrale: \verb|\int_0^1 x^2 dx| \quad $\Rightarrow \int_0^1 x^2 dx$
+  \item Radice n-esima: \verb|\sqrt[3]{x}| \quad $\Rightarrow \sqrt[3]{x}$
+  \item Simboli di disuguaglianza: \verb|<, >, \le, \ge| \quad $\Rightarrow x < y, x \ge y$
+\end{itemize}
+
+---
+
+\subsection*{Lettere greche}
+
+Si scrivono usando \verb|\| + nome.  
+Esempio:
+
+\[
+\alpha, \beta, \gamma, \lambda, \pi, \theta, \Delta
+\]
+
+---
+
+\subsection*{Equazioni allineate}
+
+Per scrivere più equazioni in colonna, si usa il pacchetto \verb|amsmath| con l'ambiente \verb|align|:
+
+\begin{verbatim}
+\begin{align}
+a &= b + c \\
+  &= d + e
+\end{align}
+\end{verbatim}
+
+Risultato:
+
+\begin{align}
+a &= b + c \\
+  &= d + e
+\end{align}
+
+---
+
+\subsection*{Altri simboli utili}
+
+\begin{itemize}
+  \item $\infty$ infinito
+  \item $\partial$ derivata parziale
+  \item $\approx$ circa uguale
+  \item $\forall, \exists$ quantificatori universale e esistenziale
+  \item $\rightarrow, \leftarrow, \leftrightarrow$ frecce
+\end{itemize}
+
+
+\newpage
+
+
+\end{document}

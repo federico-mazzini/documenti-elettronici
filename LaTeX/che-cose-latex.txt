@@ -1,0 +1,6 @@
+Spiega LaTeX come se dovessi farlo capire a un/a tuo/a amico/a o ai tuoi genitori
+
+Perchè una persona dovrebbe usare LaTeX?
+
+Perchè una persona invece NON dovrebbe usare LaTeX?
+
