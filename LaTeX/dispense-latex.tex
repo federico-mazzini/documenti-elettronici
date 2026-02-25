@@ -463,7 +463,6 @@ Ogni formula è costruita usando simboli speciali. Alcuni concetti chiave:
   \item \textbf{Integrale}: \verb|\int| con pedici e apici
 \end{itemize}
 
----
 
 \subsection*{Comandi principali e risultato}
 
@@ -478,44 +477,25 @@ Ogni formula è costruita usando simboli speciali. Alcuni concetti chiave:
   \item Simboli di disuguaglianza: \verb|<, >, \le, \ge| \quad $\Rightarrow x < y, x \ge y$
 \end{itemize}
 
----
 
 \subsection*{Lettere greche}
 
 Si scrivono usando \verb|\| + nome.  
-Esempio:
+
+\begin{verbatim}
+  \alpha, \beta, \gamma, \lambda, \pi, \theta, \Delta
+\end{verbatim}
+Risultato:
 
 \[
 \alpha, \beta, \gamma, \lambda, \pi, \theta, \Delta
 \]
 
----
-
-\subsection*{Equazioni allineate}
-
-Per scrivere più equazioni in colonna, si usa il pacchetto \verb|amsmath| con l'ambiente \verb|align|:
-
-\begin{verbatim}
-\begin{align}
-a &= b + c \\
-  &= d + e
-\end{align}
-\end{verbatim}
-
-Risultato:
-
-\begin{align}
-a &= b + c \\
-  &= d + e
-\end{align}
-
----
 
 \subsection*{Altri simboli utili}
 
 \begin{itemize}
   \item $\infty$ infinito
-  \item $\partial$ derivata parziale
   \item $\approx$ circa uguale
   \item $\forall, \exists$ quantificatori universale e esistenziale
   \item $\rightarrow, \leftarrow, \leftrightarrow$ frecce
