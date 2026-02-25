@@ -524,5 +524,112 @@ a &= b + c \\
 
 \newpage
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Documenti modulari in \LaTeX}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\LaTeX{} permette di creare documenti modulari, separando la struttura (header) dal contenuto vero e proprio.  
+Questo approccio facilita modifiche e riutilizzo del materiale.
+
+\subsection*{Idea base}
+
+\begin{itemize}
+    \item Creare un file \textbf{header.tex} che contiene tutti i comandi e il contenuto delle prime pagine:
+    \begin{itemize}
+        \item il tipo di documento (\code{\textbackslash documentclass});
+        \item pacchetti utilizzati;
+        \item definizioni di comandi personalizzati;
+        \item prima pagina e indice.
+    \end{itemize}
+    \item Creare un file \textbf{main.tex} (o altro nome) che contiene:
+    \begin{itemize}
+        \item il corpo del documento (\code{\textbackslash begin\{document\}} ... \code{\textbackslash end\{document\}});
+        \item capitoli, sezioni, testo, figure, tabelle, formule.
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Come collegare i file}
+
+Nel file \textbf{contenuto.tex}, inserire all'inizio del documento:
+
+\begin{verbatim}
+\input{header.tex}
+\begin{document}
+...
+\end{document}
+\end{verbatim}
+
+In questo modo, qualsiasi modifica fatta nel file \textbf{header.tex} si riflette automaticamente in tutti i documenti che lo includono.
+
+\subsection*{Vantaggi}
+
+\begin{itemize}
+    \item Contenuto principale separato dall'intestazione: facile da scrivere e leggere;
+    \item Possibilità di cambiare tipo di documento e prima pagina in un solo posto senza toccare il contenuto del documento;
+    \item Facilità di mantenere più versioni dello stesso documento cambiando solo l'header;
+    \item Maggiore chiarezza nella struttura del documento.
+\end{itemize}
+
+\subsection*{Suggerimento pratico}
+
+Si possono avere più header, ad esempio:
+
+\begin{itemize}
+    \item \textbf{header\_saggio.tex} per esperimenti di laboratorio;
+    \item \textbf{header\_lezione.tex} per appunti o dispense;
+    \item \textbf{header\_relazione.tex} per relazioni finali.
+\end{itemize}
+
+Basta cambiare il file incluso tramite \code{\textbackslash input} e il contenuto si adatta automaticamente.
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pagina titolo esercizi
+\thispagestyle{empty}
+\begin{center}
+\vspace*{8cm} % centra verticalmente
+{\Huge \textbf{Esercizi}}
+\end{center}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Esercizi su formule matematiche}
+
+\begin{enumerate}
+    \item Scrivere la legge di Ohm:
+    \[
+    V = R \cdot I
+    \]
+    dove $V$ è la tensione, $R$ la resistenza e $I$ la corrente.
+
+    \item Scrivere la formula dell’energia cinetica:
+    \[
+    E_c = \frac{1}{2} m v^2
+    \]
+    con $m$ massa e $v$ velocità dell’oggetto.
+
+    \item Scrivere la formula della densità:
+    \[
+    \rho = \frac{m}{V}
+    \]
+    dove $m$ è la massa e $V$ il volume.
+
+    \item Scrivere la legge di Hooke per le molle:
+    \[
+    F = k \cdot \Delta x
+    \]
+    dove $F$ è la forza, $k$ la costante elastica e $\Delta x$ l’allungamento.
+
+    \item Scrivere l’equazione chimica bilanciata per la combustione del metano:
+    \[
+    CH_4 + 2 O_2 \rightarrow CO_2 + 2 H_2O
+    \]
+
+    \item Scrivere la legge della gravitazione universale di Newton:
+    \[
+    F = G \frac{m_1 m_2}{r^2}
+    \]
+    con $G$ costante di gravitazione, $m_1$, $m_2$ masse dei corpi e $r$ distanza tra i centri.
+\end{enumerate}
 
 \end{document}
