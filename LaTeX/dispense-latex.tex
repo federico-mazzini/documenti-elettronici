@@ -270,26 +270,74 @@ Questo è \textcolor{red}{rosso}.
 
 \newpage
 \subsection{Elenchi numerati e puntati}
-Elenchi numerati:
+
+In \LaTeX{} gli elenchi si creano utilizzando ambienti dedicati.
+La sintassi deve essere esplicitata nel codice.
+
+\paragraph{Elenchi numerati}
+
+\begin{verbatim}
+\begin{enumerate}
+    \item Primo elemento
+    \item Secondo elemento
+\end{enumerate}
+\end{verbatim}
+
+\paragraph{Risultato}
 
 \begin{enumerate}
-\item Primo elemento
-\item Secondo elemento
+    \item Primo elemento
+    \item Secondo elemento
 \end{enumerate}
-Elenchi puntati:
+
+\bigskip
+
+\paragraph{Elenchi puntati}
+
+\begin{verbatim}
+\begin{itemize}
+    \item Punto 1
+    \item Punto 2
+\end{itemize}
+\end{verbatim}
+
+\paragraph{Risultato}
 
 \begin{itemize}
-\item Punto 1
-\item Punto 2
+    \item Punto 1
+    \item Punto 2
 \end{itemize}
 
+\bigskip
+
 \subsubsection{Elenchi annidati}
+
+Gli elenchi possono essere inseriti uno dentro l'altro.
+Ogni livello ha il proprio ambiente.
+
+\paragraph{Sintassi}
+
+\begin{verbatim}
 \begin{itemize}
     \item Primo livello
     \item Ancora primo livello
     \begin{itemize}
         \item Secondo livello
-        \item Ancora secondo livello
+        \begin{itemize}
+            \item Terzo livello
+        \end{itemize}
+    \end{itemize}
+    \item Di nuovo primo livello
+\end{itemize}
+\end{verbatim}
+
+\paragraph{Risultato}
+
+\begin{itemize}
+    \item Primo livello
+    \item Ancora primo livello
+    \begin{itemize}
+        \item Secondo livello
         \begin{itemize}
             \item Terzo livello
         \end{itemize}
@@ -299,35 +347,67 @@ Elenchi puntati:
 
 \newpage
 \section{Inserire figure}
-Per inserire immagini nel documento, caricare il file e usare il comando \verb|\includegraphics|.
 
-\begin{figure}[h!] 
-\includegraphics[width=0.25\linewidth]{immagini/immagine.jpg}
-\caption{Esempio di figura}
+Per inserire immagini nel documento si utilizza l'ambiente \verb|figure|
+insieme al comando \verb|\includegraphics|.
+
+\paragraph{Sintassi base}
+
+\begin{verbatim}
+\begin{figure}[h!]
+    \includegraphics{immagini/immagine.jpg}
+    \caption{Didascalia della figura}
+\end{figure}
+\end{verbatim}
+
+\paragraph{Esempio minimo}
+
+\begin{figure}[h!]
+    \includegraphics[width=0.25\linewidth]{immagini/immagine.jpg}
+    \caption{Esempio di figura}
 \end{figure}
 
+\bigskip
 
-\begin{figure}[h!] 
-\centering 
-\includegraphics[width=0.25\linewidth]{immagini/immagine.jpg}
-\caption{Esempio di figura centrata e con width 0.25}
+\paragraph{Figura centrata}
+
+\begin{verbatim}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.25\linewidth]{immagini/immagine.jpg}
+    \caption{Figura centrata}
+\end{figure}
+\end{verbatim}
+
+\paragraph{Risultato}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.25\linewidth]{immagini/immagine.jpg}
+    \caption{Figura centrata}
 \end{figure}
 
+\bigskip
 
+\paragraph{Dimensione dell'immagine}
 
-\begin{figure}[h!] 
-\centering
+\begin{verbatim}
 \includegraphics[width=0.5\linewidth]{immagini/immagine.jpg}
-\caption{Esempio di figura con width 0.5}
+\end{verbatim}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{immagini/immagine.jpg}
+    \caption{Figura con width 0.5}
 \end{figure}
 
 \begin{itemize}
-  \item La keyword \verb|centering| centra l'immagine nel documento.
-  \item La keyword \verb|width| definisce quanto grande è l'immagine.
+    \item \verb|\centering| centra l'immagine;
+    \item \verb|width| controlla la dimensione dell'immagine;
+    \item \verb|\caption| aggiunge una didascalia numerata.
 \end{itemize}
 
-
-Con il comando \verb|\newpage| è possibile definire e cominciare una nuova pagina del documento.
+Con il comando \verb|\newpage| è possibile forzare l'inizio di una nuova pagina.
 
 
 \newpage
@@ -611,5 +691,107 @@ Basta cambiare il file incluso tramite \code{\textbackslash input} e il contenut
     \]
     con $G$ costante di gravitazione, $m_1$, $m_2$ masse dei corpi e $r$ distanza tra i centri.
 \end{enumerate}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Algoritmi e complessità}
+
+Un algoritmo è una sequenza finita di istruzioni che descrive come risolvere
+un problema in modo preciso e non ambiguo.  
+Gli algoritmi sono alla base di tutti i programmi informatici.
+
+\bigskip
+
+\begin{itemize}
+    \item \textbf{Definizione di algoritmo}  
+    Un algoritmo deve essere:
+    \begin{itemize}
+        \item finito, cioè terminare dopo un numero limitato di passi;
+        \item deterministico, ogni istruzione è univoca;
+        \item generale, valido per tutti gli input ammessi.
+    \end{itemize}
+
+    \item \textbf{Esempio di problema}  
+    Calcolare la somma dei primi $n$ numeri naturali:
+    \[
+    S(n) = 1 + 2 + 3 + \dots + n
+    \]
+
+    \item \textbf{Soluzione algoritmica}  
+    La somma può essere calcolata con la formula:
+    \[
+    S(n) = \frac{n(n+1)}{2}
+    \]
+
+    \item \textbf{Costo computazionale}  
+    Oltre alla correttezza, un algoritmo si valuta per il numero di operazioni
+    necessarie a produrre il risultato.
+
+    \item \textbf{Schema riassuntivo}
+    \begin{itemize}
+        \item gli algoritmi risolvono problemi;
+        \item la correttezza è fondamentale;
+        \item l’efficienza è misurabile;
+        \item la complessità permette il confronto.
+    \end{itemize}
+\end{itemize}
+
+\bigskip
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.45\linewidth]{immagini/algorithm.jpeg}
+    \caption{Immagine ad effetto per rappresentare un algoritmo}
+\end{figure}
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Alberi}
+
+Un albero è una struttura dati gerarchica utilizzata per rappresentare
+relazioni di tipo padre--figlio.  
+Un albero non è lineare, ma organizzato su più livelli. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.3\linewidth]{immagini/albero.png}
+    \caption{Esempio di albero}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Definizione}  
+    Un albero è composto da:
+    \begin{itemize}
+        \item un nodo radice (root);
+        \item archi che collegano ogni nodo padre con i propri nodi figli;
+        \item nodi foglia (leaf), che non hanno figli.
+    \end{itemize}
+
+    \item \textbf{Tipologie}  
+    Un albero può essere:
+    \begin{itemize}
+        \item \textbf{ordinato}: la relazione tra padre e figlio è regolata da una qualche logica.
+        \item \textbf{non ordinato}: non esistono regole nella relazione padre figlio.
+    \end{itemize}
+
+    Una speciale categoria di strutture ad albero sono gli alberi binari, in cui ogni nodo può avere al massimo due figli, un figlio di sinistra e uno di destra.
+    
+    In un albero binario di altezza $h$, il numero massimo di nodi è:
+    \[
+    N_{\max} = 2^{h+1} - 1
+    \]
+
+    \item \textbf{Applicazioni}  
+    Gli alberi hanno molte applicazioni nel campo informatico:
+    \begin{itemize}
+        \item pagine web;
+        \item organizzazione di file e cartelle nel sistema operativo;
+        \item editor di testo come Word e LibreOffice;
+        \item database e dati.
+    \end{itemize}
+\end{itemize}
+
+\bigskip
 
 \end{document}
